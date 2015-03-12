@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.rest.dao.ZH_UserDAo">
+	<sql id="userColumns">user_id, user_name, user_role</sql>
+	<select id="getUserById" resultType="zh_user" parameterType="String">
+		select
+		<include refid="userColumns" />
+		from zh_user
+		where id = #{id}
+	</select>
+	<select id="getUsers" resultType="zh_user">
+		select
+		<include refid="userColumns" />
+		from zh_user
+	</select>
+	<insert id="createUser" parameterType="zh_user">
+		insert into
+		zh_user values
+		(#{user_id}, #{user_name}, #{user_password},
+		#{user_role})
+	</insert>
+	<update id="updateUser" parameterType="zh_user">
+		update zh_user set
+		<if test="user_name != null">
+			, user_name=#{user_name}
+		</if>
+		<if test="user_password != null">
+			, user_password=#{user_password}
+		</if>
+		<if test="user_role != null">
+			, user_role=#{user_role}
+		</if>
+	</update>
+	<delete id="deleteUserById">
+		delete zh_user
+		where user_id = #{user_id}
+	</delete>
+</mapper>

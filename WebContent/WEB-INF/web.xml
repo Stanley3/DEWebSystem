@@ -5,4 +5,34 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name>ZHWebSystem</display-name>
 	<description>ZH DriverExam Devices Manager System</description>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>resources/spring/applicationConfig.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.zh.rest.services.ZHApplication</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<resource-ref>
+		<description>Database resource rest demo web application </description>
+		<res-ref-name>jdbc/restDemoDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 </web-app>

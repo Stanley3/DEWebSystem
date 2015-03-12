@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.rest.dao.ZH_Guest">
+	<sql id="guestColumns">guest_id, guest_name, guest_cellphone, guest_fixedline, guest_area</sql>
+	<select id="getGuestById" resultType="zh_guest" >
+		select 
+		<include refid="guestColumns"/>
+		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id
+		where guest_id = #{id}
+	</select>
+	<!-- <resultMap type="zh_guest" id="guestResult">
+		<id property="guest_id" column="guest_id" />
+		<result property="guest_name" column="guest_name" />
+		<result property="guest_cellphone" column="guest_cellphone" />
+		<result property="guest_fixedline" column="guest_fixedline" />
+		<association property="guest_area" resultMap="areaResult"/>
+	</resultMap>
+	<resultMap type="zh_area" id="areaResult">
+		<id property="id" column="area_id"/>
+		<result property="address" column="guest_address"/>
+	</resultMap> -->
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>	
+		<typeAlias type="com.zh.rest.dao.ZH_AreaDao" alias="zh_area"/>
+		<typeAlias type="com.zh.rest.dao.ZH_GuestDao" alias="zh_guest"/>
+		<typeAlias type="com.zh.rest.dao.ZH_UserDao" alias="zh_user"/>
+		<typeAlias type="com.zh.rest.dao.ZH_VehicleDao" alias="zh_vehicle"/>
+	</typeAliases>
+	<mappers >
+		<mapper url="file:///E:/Workplace/ZHWS/WebContent/resources/mappers/zh_guest.xml"/>
+	</mappers>
+</configuration>
