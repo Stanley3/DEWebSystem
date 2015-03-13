@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.rest.dao.ZH_VehicleDao">
+	<sql id="detialVehicleColumns">
+		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock,
+		vehicle_arrearage, guest_name, guest_cellphone, area_address
+	</sql>
+	<sql id="vehicleColumns">
+		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock,vehicle_arrearage
+	</sql>
+	<select id="getVehicleById" resultType="zh_vehicle" parameterType="String">
+		select
+		<include refid="vehicleColumns" />
+		from zh_vehicle
+		where vehicle_id = #{id}
+	</select>
+	<select id="getVehicles" resultType="detialVehicleInfo">
+		select
+		<include refid="detialVehicleColumns" />
+		from 
+		zh_vehicle 
+			left outer join zh_guest on vehicle_guest = guest_id 
+			left outer join zh_area on guest_area = area_id
+	</select>
+	<insert id="createVehicle" parameterType="zh_vehicle">
+		insert into
+		zh_vehicle values
+		(#{vehicle_id}, #{vehicle_sn}, #{vehicle_vin},
+		#{vehicle_phone}, #{vehicle_lock}, #{vehicle_arrearage},
+		#{vehicle_remark}, #{vehicle_guest})
+	</insert>
+	<update id="updateVehicle" parameterType="zh_vehicle">
+		update zh_vehicle set
+		<if test="vehicle_sn != null">
+			 vehicle_sn=#{vehicle_sn}
+		</if>
+		<if test="vehicle_vin != null">
+			, vehicle_vin=#{vehicle_vin}
+		</if>
+		<if test="vehicle_phone != null">
+			, vehicle_phone=#{vehicle_phone}
+		</if>
+		<if test="vehicle_lock != null">
+			, vehicle_lock = #{vehicle_lock}
+		</if>
+		<if test="vehicle_arrearage != null">
+			, vehicle_arrearage = #{vehicle_arrearage}
+		</if>
+		<if test="vehicle_remark != null">
+			, vehicle_remark = #{vehicle_remark}
+		</if>
+		<if test="vehicle_guest != null">
+			vehicle_guest = #{vehicle_guest}
+		</if>
+	</update>
+	<delete id="deleteVehicleById">
+		delete zh_vehicle
+		where vehicle_id = #{vehicle_id}
+	</delete>
+</mapper>

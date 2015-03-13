@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.rest.dao.ZH_AreaDao">
+	<sql id="areaColumns">area_id, area_address</sql>
+	<select id="getAreaById" resultType="zh_area" parameterType="String">
+		select
+		<include refid="areaColumns" />
+		from zh_area
+		where area_id = #{id}
+	</select>
+	<select id="getArea" resultType="zh_area">
+		select
+		<include refid="areaColumns" />
+		from zh_area
+	</select>
+	<insert id="createArea" parameterType="zh_area">
+		insert into
+		zh_area values
+		(#{area_id},#{area_address})
+	</insert>
+	<update id="updateArea" parameterType="zh_area">
+		update zh_area set
+		<if test="area_address != null">
+			 area_address=#{area_address}
+		</if>
+	</update>
+	<delete id="deleteAreaById">
+		delete zh_area
+		where area_id = #{area_id}
+	</delete>
+</mapper>

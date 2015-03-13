@@ -2,6 +2,9 @@ package com.zh.rest.entities;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ZH_Vehicle implements Serializable{
 	public static final long serialVersionUID = -6076339665380866937L;
 	

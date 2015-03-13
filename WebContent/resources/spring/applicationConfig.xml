@@ -26,6 +26,18 @@
 	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
 	   <property name="mapperInterface" value="com.zh.rest.dao.ZH_GuestDao" />
 	</bean>
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
+	   <property name="mapperInterface" value="com.zh.rest.dao.ZH_UserDao" />
+	</bean>
+	<bean id="areaDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
+	   <property name="mapperInterface" value="com.zh.rest.dao.ZH_AreaDao" />
+	</bean>
+	<bean id="vehicleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	   <property name="sqlSessionFactory" ref="sqlSessionFactory"/>    
+	   <property name="mapperInterface" value="com.zh.rest.dao.ZH_VehicleDao" />
+	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="dataSource" ref="dataSource" />
 	    <property name="configLocation" value="resources/config/mybatis3.xml"/>

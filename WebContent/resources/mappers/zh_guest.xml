@@ -3,22 +3,38 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zh.rest.dao.ZH_GuestDao">
-	<sql id="guestColumns">guest_id, guest_name, guest_cellphone, guest_fixedline, guest_area</sql>
-	<select id="getGuestById" resultType="zh_guest" >
+	<sql id="guestColumns">guest_id, guest_name, guest_cellphone, guest_fixedline, area_address</sql>
+	<select id="getGuestById" resultType="detialGuestInfo" >
 		select 
 		<include refid="guestColumns"/>
 		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id
 		where guest_id = #{id}
 	</select>
-	<!-- <resultMap type="zh_guest" id="guestResult">
-		<id property="guest_id" column="guest_id" />
-		<result property="guest_name" column="guest_name" />
-		<result property="guest_cellphone" column="guest_cellphone" />
-		<result property="guest_fixedline" column="guest_fixedline" />
-		<association property="guest_area" resultMap="areaResult"/>
-	</resultMap>
-	<resultMap type="zh_area" id="areaResult">
-		<id property="id" column="area_id"/>
-		<result property="address" column="guest_address"/>
-	</resultMap> -->
+	<select id="getGuests" resultType="detialGuestInfo">
+		select 
+		<include refid="guestColumns"/>
+		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id		
+	</select>
+	<insert id="createGuest" parameterType="zh_guest">
+		insert into zh_area values (#{guest_id}, #{guest_name}, #{guest_cellphone}, #{guest_fixedline}, #{guest_area})
+	</insert>
+	<update id="updateGuest" parameterType="zh_guest">
+		update zh_area 
+		set
+		<if test="guest_name != null">
+			guest_name = #{guest_name},
+		</if>
+		<if test="guest_cellphone != null">
+			guest_cellphone = #{guest_cellphone},
+		</if>
+		<if test="guest_fixedline != null">
+			guest_fixedline = #{guest_fixedline},
+		</if>
+		<if test="guest_area != null">
+			guest_area = #{guest_area}
+		</if>
+	</update>
+	<delete id="deleteGuestById">
+		delete zh_guest where guest_id = #{guest_id}
+	</delete>
 </mapper>

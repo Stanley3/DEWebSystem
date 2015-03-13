@@ -5,24 +5,24 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ZH_Guest implements Serializable {
+public class DetialGuestInfo implements Serializable {
 	public static final long serialVersionUID = -6538060763396866937L;
 	
 	private String guest_id;
 	private String guest_name;
 	private String guest_cellphone;
 	private String guest_fixedline;
-	private String guest_area; 
+	private String area_address; //此处为客户的地址而不是客户地址的id
 	
-	public ZH_Guest(){}
+	public DetialGuestInfo(){}
 
-	public ZH_Guest(String guest_id, String guest_name, String guest_cellphone,
+	public DetialGuestInfo(String guest_id, String guest_name, String guest_cellphone,
 			String guest_fixedline, String area_address) {
 		this.guest_id = guest_id;
 		this.guest_name = guest_name;
 		this.guest_cellphone = guest_cellphone;
 		this.guest_fixedline = guest_fixedline;
-		this.guest_area = area_address;
+		this.area_address = area_address;
 	}
 
 	public String getGuest_id() {
@@ -58,11 +58,11 @@ public class ZH_Guest implements Serializable {
 	}
 
 	public String getArea_address() {
-		return guest_area;
+		return area_address;
 	}
 
 	public void setArea_address(String area_address) {
-		this.guest_area = area_address;
+		this.area_address = area_address;
 	}
 	
 }

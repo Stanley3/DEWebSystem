@@ -8,6 +8,9 @@ public class ZHApplication extends ResourceConfig {
 	public ZHApplication(){
 	register(RequestContextFilter.class);
 	register(ZH_GuestService.class);
+	register(ZH_UserService.class);
+	register(ZH_AreaService.class);
+	register(ZH_VehicleService.class);
 	register(JacksonFeature.class);
 	}
 }

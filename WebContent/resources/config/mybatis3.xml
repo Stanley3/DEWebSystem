@@ -4,12 +4,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>	
-		<typeAlias type="com.zh.rest.dao.ZH_AreaDao" alias="zh_area"/>
-		<typeAlias type="com.zh.rest.dao.ZH_GuestDao" alias="zh_guest"/>
-		<typeAlias type="com.zh.rest.dao.ZH_UserDao" alias="zh_user"/>
-		<typeAlias type="com.zh.rest.dao.ZH_VehicleDao" alias="zh_vehicle"/>
+		<typeAlias type="com.zh.rest.entities.ZH_Area" alias="zh_area"/>
+		<typeAlias type="com.zh.rest.entities.ZH_Guest" alias="zh_guest"/>
+		<typeAlias type="com.zh.rest.entities.ZH_User" alias="zh_user"/>
+		<typeAlias type="com.zh.rest.entities.ZH_Vehicle" alias="zh_vehicle"/>
+		
+		<typeAlias type="com.zh.rest.entities.DetialGuestInfo" alias="detialGuestInfo"/>
+		<typeAlias type="com.zh.rest.entities.DetialVehicleInfo" alias="detialVehicleInfo"/>
 	</typeAliases>
 	<mappers >
 		<mapper url="file:///E:/Workplace/ZHWS/WebContent/resources/mappers/zh_guest.xml"/>
+		<mapper url="file:///E:/Workplace/ZHWS/WebContent/resources/mappers/zh_user.xml"/>
+		<mapper url="file:///E:/Workplace/ZHWS/WebContent/resources/mappers/zh_area.xml"/>
+		<mapper url="file:///E:/Workplace/ZHWS/WebContent/resources/mappers/zh_vehicle.xml"/>
 	</mappers>
 </configuration>
