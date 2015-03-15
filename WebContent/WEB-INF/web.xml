@@ -21,12 +21,16 @@
 			<param-name>javax.ws.rs.Application</param-name>
 			<param-value>com.zh.rest.services.ZHApplication</param-value>
 		</init-param>
+		<init-param>
+            <param-name>listings</param-name>
+            <param-value>true</param-value>
+        </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
 	<resource-ref>

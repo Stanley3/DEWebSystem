@@ -1,9 +1,11 @@
 package com.zh.rest.services;
 
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -32,19 +35,26 @@ public class ZH_AreaService {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_HTML)
-	public Response createUser(@FormParam("address") String address){
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response createArea(@FormParam("address") String address){
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replace("-", "");
 		ZH_Area area = new ZH_Area(id, address);
+		System.out.println("接收到的地址为：" + address); 
 		areaDao.createArea(area);
 		return Response.status(201).entity("新增成功").build();
 	}
 	
 	@GET 
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response getAllUsers(){
-		return Response.status(200).entity(areaDao.getArea()).build();
+	public Response getAllUsers(@DefaultValue("") @QueryParam("address") String address){
+		System.out.println("查询方法得到执行！");
+		if(address.isEmpty())
+			return Response.status(200).entity(areaDao.getArea()).build();
+		else{
+			System.out.println("地址为：" + address);
+			return Response.status(200).entity(areaDao.getQueriedArea(address)).build();
+		}
 	}
 	
 	@GET
@@ -66,6 +76,7 @@ public class ZH_AreaService {
 	@Transactional
 	public Response updateUserById(@PathParam("id") String id, ZH_Area area) {
 		if(area.getArea_id() == null) area.setArea_id(id);
+		System.out.println("更新操作得到执行");
 		String message; 
 		int status; 
 		if(areaWasUpdated(area)){
@@ -94,14 +105,17 @@ public class ZH_AreaService {
 	@Path("{id}")
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)
+	@Transactional
 	public Response deleteUserById(@PathParam("id") String id){
-		if(areaDao.deleteAreaById(id) == 1){
-			return Response.status(204).entity("删除成功").build();
+		System.out.println("删除方法得到执行！");
+		int count = areaDao.deleteAreaById(id);
+		if(count == 1){
+			return Response.status(200).entity("true").build();
 		}else
-			return Response.status(404).entity("请求的id" + id + "不存在").build();
+			return Response.status(404).entity("false").build();
 	}
 	
-	public void setUserDao(ZH_AreaDao areaDao) {
+	public void setAreaDao(ZH_AreaDao areaDao) {
 		this.areaDao = areaDao;
 	}
 }

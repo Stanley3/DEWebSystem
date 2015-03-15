@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="areaColumns" />
 		from zh_area
 	</select>
+	<select id="getQueriedArea" resultType="zh_area">
+		select
+		<include refid="areaColumns" />
+		from zh_area
+		where area_address like "%"#{address}"%"
+	</select>
 	<insert id="createArea" parameterType="zh_area">
 		insert into
 		zh_area values
@@ -27,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</update>
 	<delete id="deleteAreaById">
-		delete zh_area
+		delete from zh_area
 		where area_id = #{area_id}
 	</delete>
 </mapper>

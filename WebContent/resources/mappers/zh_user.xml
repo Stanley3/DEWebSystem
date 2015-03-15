@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="userColumns" />
 		from zh_user
 	</select>
+	<select id="validateUser" resultType="zh_user">
+		select 
+		<include refid="userColumns"/>
+		from zh_user
+		where user_name = #{param1} and user_password = #{param2}
+	</select>
 	<insert id="createUser" parameterType="zh_user">
 		insert into
 		zh_user values

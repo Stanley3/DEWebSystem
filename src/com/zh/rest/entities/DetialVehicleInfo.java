@@ -16,7 +16,7 @@ public class DetialVehicleInfo implements Serializable{
 	private String vehicle_version;
 	private String guest_name;
 	private String guest_cellphone;
-	private String guest_address;
+	private String area_address;
 	
 	public DetialVehicleInfo(){}
 
@@ -33,7 +33,7 @@ public class DetialVehicleInfo implements Serializable{
 		this.vehicle_version = vehicle_version;
 		this.guest_name = guest_name;
 		this.guest_cellphone = guest_cellphone;
-		this.guest_address = guest_address;
+		this.area_address = guest_address;
 	}
 
 	public String getVehicle_sn() {
@@ -108,12 +108,12 @@ public class DetialVehicleInfo implements Serializable{
 		this.guest_cellphone = guest_cellphone;
 	}
 
-	public String getGuest_address() {
-		return guest_address;
+	public String getArea_address() {
+		return area_address;
 	}
 
-	public void setGuest_address(String guest_address) {
-		this.guest_address = guest_address;
+	public void setArea_address(String guest_address) {
+		this.area_address = guest_address;
 	}
 	
 	

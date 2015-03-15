@@ -42,7 +42,6 @@
 	    <property name="dataSource" ref="dataSource" />
 	    <property name="configLocation" value="resources/config/mybatis3.xml"/>
 	</bean>
-	
 	<!-- 配置自定义的服务-->
    <!--  <bean id="zh_guestService" class="com.zh.rest.services.ZH_GuestService" >
     	<property name="guestDao" ref="guestDao"/>

@@ -10,4 +10,5 @@ public interface ZH_UserDao {
 	public ZH_User getUserById(String user_id); //等到一个用户通过id
 	public int updateUser(ZH_User user); //更新一个用户通过id
 	public int deleteUserById(String user_id); //删除一个用户通过id
+	public ZH_User validateUser(String name, String password);
 }

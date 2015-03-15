@@ -37,10 +37,12 @@ public class ZH_VehicleService {
 							   @FormParam("lock") int lock,
 							   @FormParam("arrearage") double arrearage,
 							   @FormParam("remark") String remark,
-							   @FormParam("guest") String guest){		
+							   @FormParam("guest") String guest,
+							   @FormParam("version") String version,
+							   @FormParam("status") int status){		
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replace("-", "");
-		ZH_Vehicle vehicle = new ZH_Vehicle(id, sn, vin, phone, lock, arrearage, remark, guest);
+		ZH_Vehicle vehicle = new ZH_Vehicle(id, sn, vin, phone, lock, arrearage, remark, guest, version, status);
 		vehicleDao.createVehicle(vehicle);
 		return Response.status(201).entity("新增成功").build();
 	}

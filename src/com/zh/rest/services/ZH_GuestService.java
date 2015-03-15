@@ -1,5 +1,6 @@
 package com.zh.rest.services;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -41,7 +42,17 @@ public class ZH_GuestService {
 	@GET
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response getAllUsers(){
-		return Response.status(200).entity(guestDao.getGuests()).build();
+		ArrayList<DetialGuestInfo> guestList =  (ArrayList<DetialGuestInfo>) guestDao.getGuests();
+		/*String name = guestList.get(0).getGuest_name();
+		try {
+			name = new String(name.getBytes("gbk"), "ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		guestList.get(0).setGuest_name(name);
+		System.out.println(guestList.get(0).getGuest_name());*/
+		return Response.status(200).entity(guestList).build();
 	}
 	
 	@POST
@@ -58,7 +69,7 @@ public class ZH_GuestService {
 		return Response.status(201).entity("新增成功").build();
 	}
 	
-	@PUT
+	@POST
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_HTML)
@@ -75,7 +86,7 @@ public class ZH_GuestService {
 			message = "新增成功";
 		} else {
 			status = 406; //Not acceptable
-			message = "提供的信息不争取";
+			message = "提供的信息不正确";
 		}
 		
 		return Response.status(status).entity(message).build();		

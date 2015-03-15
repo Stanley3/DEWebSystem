@@ -16,12 +16,15 @@ public class ZH_Vehicle implements Serializable{
 	private double vehicle_arrearage;
 	private String vehicle_remark;
 	private String vehicle_guest;
+	private String vehicle_version;
+	private int vehicle_status;
 	
 	public ZH_Vehicle(){}
 
 	public ZH_Vehicle(String vehicle_id, String vehicle_sn, String vehicle_vin,
 			String vehicle_phone, int vehicle_lock, double vehicle_arrearage,
-			String vehicle_remark, String vehicle_guest) {
+			String vehicle_remark, String vehicle_guest, String vehicle_version,
+			int vehicle_status) {
 		this.vehicle_id = vehicle_id;
 		this.vehicle_sn = vehicle_sn;
 		this.vehicle_vin = vehicle_vin;
@@ -30,6 +33,8 @@ public class ZH_Vehicle implements Serializable{
 		this.vehicle_arrearage = vehicle_arrearage;
 		this.vehicle_remark = vehicle_remark;
 		this.vehicle_guest = vehicle_guest;
+		this.vehicle_status = vehicle_status;
+		this.vehicle_version = vehicle_version;
 	}
 
 	public String getVehicle_id() {
@@ -94,6 +99,22 @@ public class ZH_Vehicle implements Serializable{
 
 	public void setVehicle_guest(String vehicle_guest) {
 		this.vehicle_guest = vehicle_guest;
+	}
+
+	public String getVehicle_version() {
+		return vehicle_version;
+	}
+
+	public int getVehicle_status() {
+		return vehicle_status;
+	}
+
+	public void setVehicle_version(String vehicle_version) {
+		this.vehicle_version = vehicle_version;
+	}
+
+	public void setVehicle_status(int vehicle_status) {
+		this.vehicle_status = vehicle_status;
 	}
 	
 }

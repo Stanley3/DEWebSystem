@@ -13,7 +13,7 @@ public class ZH_Area implements Serializable{
 	
 	public ZH_Area(){}
 
-	public ZH_Area(String area_address, String area_id) {
+	public ZH_Area(String area_id, String area_address) {
 		super();
 		this.area_address = area_address;
 		this.area_id = area_id;

@@ -41,6 +41,16 @@ public class ZH_UserService {
 		return Response.status(201).entity("新增成功").build();
 	}
 	
+	@POST
+	@Path("/validate")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_SVG_XML})
+	public Response validateUser(@FormParam("name") String name, 
+								 @FormParam("password") String password){
+		System.out.println("-------------就收到用户的输入参数为：" + name + ", " + password + "----------------");
+		return Response.status(200).entity(userDao.validateUser(name, password)).build();
+	}
+	
 	@GET 
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response getAllUsers(){

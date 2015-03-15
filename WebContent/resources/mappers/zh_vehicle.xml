@@ -4,11 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zh.rest.dao.ZH_VehicleDao">
 	<sql id="detialVehicleColumns">
-		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock,
-		vehicle_arrearage, guest_name, guest_cellphone, area_address
+		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock, vehicle_version,
+		vehicle_arrearage, vehicle_status, guest_name, guest_cellphone, area_address
 	</sql>
 	<sql id="vehicleColumns">
-		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock,vehicle_arrearage
+		vehicle_sn, vehicle_vin, vehicle_phone, vehicle_lock,vehicle_arrearage,
+		vehicle_version, vehicle_status, vehicle_remark
 	</sql>
 	<select id="getVehicleById" resultType="zh_vehicle" parameterType="String">
 		select
