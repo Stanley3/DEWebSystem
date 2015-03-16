@@ -69,9 +69,9 @@ public class ZH_AreaService {
 		}
 	}
 	
-	@PUT 
+	/*@PUT 
 	@Path("{id}")
-	@Consumes({MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
 	@Produces({MediaType.TEXT_HTML})	
 	@Transactional
 	public Response updateUserById(@PathParam("id") String id, ZH_Area area) {
@@ -100,6 +100,20 @@ public class ZH_AreaService {
 	
 	private boolean areaCanBeCreated(ZH_Area area){
 		return area.getArea_id() != null && area.getArea_address() != null;
+	}*/
+	
+	@Path("{id}")
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_HTML)
+	public Response updateArea(@PathParam("id") String id, @FormParam("address") String address){
+		System.out.println("更新方法得到执行！");
+		System.out.println("id: " + id + ", address:" + address);
+		ZH_Area area = new ZH_Area(id, address);
+		if(areaDao.updateArea(area) == 1)
+				return Response.status(200).entity("更新成功").build();
+		else
+			return Response.status(404).entity("更新失败").build();
 	}
 	
 	@Path("{id}")

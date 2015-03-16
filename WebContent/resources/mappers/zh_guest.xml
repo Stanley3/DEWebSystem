@@ -35,6 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</update>
 	<delete id="deleteGuestById">
-		delete zh_guest where guest_id = #{guest_id}
+		delete from zh_guest where guest_id = #{guest_id}
 	</delete>
 </mapper>

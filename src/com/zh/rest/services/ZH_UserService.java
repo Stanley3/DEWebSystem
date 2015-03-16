@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -34,11 +36,12 @@ public class ZH_UserService {
 	public Response createUser(@FormParam("name") String name,
 			@FormParam("password") String password, 
 			@FormParam("role") String role){
+		System.out.println("-------输入的用户名为：" + name + "密码：" + password + ", 角色：" + role + "--------");
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replace("-", "");
 		ZH_User user = new ZH_User(id, name, password, role);
 		userDao.createUser(user);
-		return Response.status(201).entity("新增成功").build();
+		return Response.status(201).entity("true").build();
 	}
 	
 	@POST
@@ -51,10 +54,20 @@ public class ZH_UserService {
 		return Response.status(200).entity(userDao.validateUser(name, password)).build();
 	}
 	
-	@GET 
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response getAllUsers(){
-		return Response.status(200).entity(userDao.getUsers()).build();
+	@POST
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response updateUserById(@PathParam("id") String id, 
+								   @FormParam("name") String name,
+								   @FormParam("role") String role){
+		System.out.println("更新方法得到执行！");
+		ZH_User user = new ZH_User(id, name, null, role);
+		if(userDao.updateUser(user) == 1)
+			return Response.status(200).entity("true").build();
+		else
+			return Response.status(404).entity("false").build();
+		
 	}
 	
 	@GET
@@ -69,36 +82,17 @@ public class ZH_UserService {
 		}
 	}
 	
-	@PUT 
-	@Path("{id}")
-	@Consumes({MediaType.APPLICATION_JSON})
-	@Produces({MediaType.TEXT_HTML})	
-	@Transactional
-	public Response updateUserById(@PathParam("id") String id, ZH_User user) {
-		if(user.getUser_id() == null) user.setUser_id(id);
-		String message; 
-		int status; 
-		if(userWasUpdated(user)){
-			status = 200; //OK
-			message = "更新成功";
-		} else if(userCanBeCreated(user)){
-			userDao.createUser(user);
-			status = 201; //Created 
-			message = "新增成功";
-		} else {
-			status = 406; //Not acceptable
-			message = "提供的信息不争取";
+	@GET 
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response getAllUsers(@DefaultValue("") @QueryParam("name") String name,
+								@DefaultValue("") @QueryParam("role") String role){
+		System.out.println("查询方法得到执行！");
+		if(name.isEmpty() && role.isEmpty())
+			return Response.status(200).entity(userDao.getUsers()).build();
+		else{
+			System.out.println("用户名为：" + name + ", 角色为: " + role);
+			return Response.status(200).entity(userDao.getQueriedUsers(name, role)).build();
 		}
-		
-		return Response.status(status).entity(message).build();		
-	}
-	
-	private boolean userWasUpdated(ZH_User user){
-		return userDao.updateUser(user) == 1;
-	}
-	
-	private boolean userCanBeCreated(ZH_User user){
-		return user.getUser_id() != null && user.getUser_name() != null;
 	}
 	
 	@Path("{id}")
@@ -106,9 +100,9 @@ public class ZH_UserService {
 	@Produces(MediaType.TEXT_HTML)
 	public Response deleteUserById(@PathParam("id") String id){
 		if(userDao.deleteUserById(id) == 1){
-			return Response.status(204).entity("删除成功").build();
+			return Response.status(204).entity("true").build();
 		}else
-			return Response.status(404).entity("请求的id" + id + "不存在").build();
+			return Response.status(404).entity("false").build();
 	}
 	
 	public void setUserDao(ZH_UserDao userDao) {

@@ -28,9 +28,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	<update id="updateArea" parameterType="zh_area">
 		update zh_area set
-		<if test="area_address != null">
 			 area_address=#{area_address}
-		</if>
+			 where area_id = #{area_id}
 	</update>
 	<delete id="deleteAreaById">
 		delete from zh_area
