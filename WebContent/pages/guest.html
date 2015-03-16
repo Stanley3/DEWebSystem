@@ -17,12 +17,15 @@
 		var pager = $('#dg').datagrid().datagrid('getPager');
 	});// get the pager of datagrid
 	var editIndex = undefined;
-	function searchAndReload(v) {
+	var area_id = undefined; //保存选择的地区的id
+	function searchAndReload(name, cellphone, address) {
 		$('#dg').datagrid({
-			url : 'http://localhost:8080/ZHWS/rest/areas',
+			url : 'http://localhost:8080/ZHWS/rest/guests',
 			method : 'get',
 			queryParams : {
-				address : v
+				name : name,
+				cellphone : cellphone,
+				address :address 
 			}
 		});
 		$('#dg').datagrid('reload');
@@ -31,6 +34,13 @@
 		if (editIndex == undefined)
 			return true;
 		if ($('#dg').datagrid('validateRow', editIndex)) {
+			var ed = $('#dg').datagrid('getEditor', {
+				index : editIndex,
+				field : 'area_address'
+			});
+			var address = $(ed.target).combobox('getText');
+			area_id = $(ed.target).combobox('getValue');
+			$(ed.target).combobox('setValue', address); //将选中的值赋给单元格
 			$('#dg').datagrid('endEdit', editIndex);
 			editIndex = undefined;
 			return true;
@@ -66,6 +76,7 @@
 		editIndex = undefined;
 	}
 	function accept() { //update到服务器
+	/* try{ */
 		if (endEditing()) {
 			var changes = $('#dg').datagrid('getChanges', 'inserted');
 			if (changes != null && changes.length != 0) {
@@ -74,15 +85,17 @@
 				var completed; //确保上次的ajax成功后才进行下次的ajax操作
 				for (i in changes) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/areas',
+						url : 'http://localhost:8080/ZHWS/rest/guests',
 						type : 'post',
 						dataType : 'text',
 						data : {
-							address : changes[i].area_address
+							name: changes[i].guest_name, 
+							cellphone : changes[i].guest_cellphone,
+							fixedline : changes[i].guest_fixedline,
+							area : area_id
 						},
 						success : function(data) {
 							if (data != null) {
-								completed = true;
 							}
 						},
 						error : function(msg) {
@@ -98,20 +111,22 @@
 				var i;
 				var url = "";
 				for (i = 0; i < changes.length
-						&& changes[i].area_id != undefined
-						&& changes[i].area_id != ""; ++i) {
-					url = "http://localhost:8080/ZHWS/rest/areas/"
-							+ changes[i].area_id;
+						&& changes[i].guest_id != undefined
+						&& changes[i].guest_id != ""; ++i) {
+					url = "http://localhost:8080/ZHWS/rest/guests/"
+							+ changes[i].guest_id;
 					$.ajax({
 						url : url,
 						type : 'post',
 						dataType : 'text',
 						data : {
-							address : changes[i].area_address
+							name: changes[i].guest_name, 
+							cellphone : changes[i].guest_cellphone,
+							fixedline : changes[i].guest_fixedline,
+							area : area_id
 						},
 						success : function(data) {
-							if (data != null)
-								completed = true;
+							if (data != null){}
 						},
 						error : function(msg) {
 							alert(msg.getStatus());
@@ -124,16 +139,15 @@
 				//删除行操作
 				var i;
 				for (i = 0; i < changes.length
-						&& changes[i].area_id != undefined
-						&& changes[i].area_id != ""; ++i) {
+						&& changes[i].guest_id != undefined
+						&& changes[i].guest_id != ""; ++i) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/areas/'
-								+ changes[i].area_id,
+						url : 'http://localhost:8080/ZHWS/rest/guests/'
+								+ changes[i].guest_id,
 						type : 'delete',
 						dataType : 'text',
 						success : function(data) {
 							if (data != 'false') {
-								completed = true;
 							}
 						},
 						error : function(msg) {
@@ -144,6 +158,10 @@
 			}
 			$('#dg').datagrid('acceptChanges');
 		}
+	/* }catch(err){
+		alert(err);
+	} */
+		
 	}
 	function reject() {
 		var rows = $('#dg').datagrid('getChanges').length;
@@ -257,16 +275,50 @@
 						</thead>
 					</table>
 					<div id="sDiv" style="display:none">
-						<label for="search">请输入地区名：</label> <input id="search"
+						<label for="search">请输入客户姓名：</label> <input id="sName"
 							name="search" class="easyui-textbox" style="width:300px"
 							data-options="
-								prompt:'请输入地区名...',
+								prompt:'请输入客户姓名...',
 								icons:[{
 									iconCls: 'icon-search',
 									handler: function(e){
-												var v = $(e.data.target).textbox('getValue');
-												if(v)
-													searchAndReload(v);
+												var name = $(e.data.target).textbox('getValue');
+												var cellphone = $('#sCellphone').textbox('getValue');
+												var address = $('#sAddress').textbox('getValue');
+												if(name)
+													searchAndReload(name, cellphone, address);
+												}
+
+								}]" />
+						<br />
+						<label for="search">请输入客户手机号：</label> <input id="sCellphone"
+							name="search" class="easyui-numberbox" style="width:300px"
+							data-options="
+								prompt:'请输入客户手机号...',
+								icons:[{
+									iconCls: 'icon-search',
+									handler: function(e){
+												var cellphone = $(e.data.target).textbox('getValue');
+												var name = $('#sName').textbox('getValue');
+												var address = $('#sAddress').textbox('getValue');
+												if(cellphone)
+													searchAndReload(name, cellphone, address);
+												}
+
+								}]" />
+						<br />
+						<label for="search">请输入客户地址：</label> <input id="sAddress"
+							name="search" class="easyui-textbox" style="width:300px"
+							data-options="
+								prompt:'请输入客户地址...',
+								icons:[{
+									iconCls: 'icon-search',
+									handler: function(e){
+												var address = $(e.data.target).textbox('getValue');
+												var name = $('#sName').textbox('getValue');
+												var cellphone = $('#sCellphone').textbox('getValue');
+												if(address)
+													searchAndReload(name, cellphone, address);
 												}
 
 								}]" />

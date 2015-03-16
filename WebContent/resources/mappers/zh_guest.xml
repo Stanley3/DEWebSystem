@@ -15,24 +15,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="guestColumns"/>
 		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id		
 	</select>
+	<select id="getQueriedGuests" resultType="detialGuestInfo">
+		select 
+		<include refid="guestColumns"/>
+		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id
+		<where>
+			<if test="param1 != null">
+				and guest_name like "%"#{param1}"%"
+			</if>
+			<if test="param2 != null">
+				and guest_cellphone like "%"#{param2}"%"
+			</if>
+			<if test="param3 != null">
+				and area_address like "%"#{param3}"%"
+			</if>
+		</where>
+	</select>
 	<insert id="createGuest" parameterType="zh_guest">
-		insert into zh_area values (#{guest_id}, #{guest_name}, #{guest_cellphone}, #{guest_fixedline}, #{guest_area})
+		insert into zh_guest values (#{guest_id}, #{guest_name}, #{guest_cellphone}, #{guest_fixedline}, #{guest_area})
 	</insert>
 	<update id="updateGuest" parameterType="zh_guest">
-		update zh_area 
-		set
-		<if test="guest_name != null">
-			guest_name = #{guest_name},
-		</if>
-		<if test="guest_cellphone != null">
-			guest_cellphone = #{guest_cellphone},
-		</if>
-		<if test="guest_fixedline != null">
-			guest_fixedline = #{guest_fixedline},
-		</if>
-		<if test="guest_area != null">
-			guest_area = #{guest_area}
-		</if>
+		update zh_guest 
+		<set>
+			<if test="guest_name != null">
+				guest_name = #{guest_name},
+			</if>
+			<if test="guest_cellphone != null">
+				guest_cellphone = #{guest_cellphone},
+			</if>
+			<if test="guest_fixedline != null">
+				guest_fixedline = #{guest_fixedline},
+			</if>
+			<if test="guest_area != null">
+				guest_area = #{guest_area}
+			</if>
+		</set>
+		where guest_id = #{guest_id}
 	</update>
 	<delete id="deleteGuestById">
 		delete from zh_guest where guest_id = #{guest_id}

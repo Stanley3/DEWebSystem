@@ -37,7 +37,7 @@
 				field : 'user_role'
 			});
 			var roleName = $(ed.target).combobox('getText');
-			$(ed.target).combobox('setValues', roleName); //将选中的值赋给单元格
+			$(ed.target).combobox('setValue', roleName); //将选中的值赋给单元格
 			$('#dg').datagrid('endEdit', editIndex);
 			editIndex = undefined;
 			return true;
