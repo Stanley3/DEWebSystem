@@ -17,7 +17,8 @@
 		var pager = $('#dg').datagrid().datagrid('getPager');
 	});// get the pager of datagrid
 	var editIndex = undefined;
-	var area_id = undefined; //保存选择的地区的id
+	var area_id = null; //保存选择的地区的id
+	var itemChanged = false;
 	function searchAndReload(name, cellphone, address) {
 		$('#dg').datagrid({
 			url : 'http://localhost:8080/ZHWS/rest/guests',
@@ -25,7 +26,7 @@
 			queryParams : {
 				name : name,
 				cellphone : cellphone,
-				address :address 
+				address : address
 			}
 		});
 		$('#dg').datagrid('reload');
@@ -34,13 +35,15 @@
 		if (editIndex == undefined)
 			return true;
 		if ($('#dg').datagrid('validateRow', editIndex)) {
-			var ed = $('#dg').datagrid('getEditor', {
-				index : editIndex,
-				field : 'area_address'
-			});
-			var address = $(ed.target).combobox('getText');
-			area_id = $(ed.target).combobox('getValue');
-			$(ed.target).combobox('setValue', address); //将选中的值赋给单元格
+			if (itemChanged) {
+				var ed = $('#dg').datagrid('getEditor', {
+					index : editIndex,
+					field : 'area_address'
+				});
+				var address = $(ed.target).combobox('getText');
+				area_id = $(ed.target).combobox('getValue');
+				$(ed.target).combobox('setValue', address); //将选中的值赋给单元格
+			}
 			$('#dg').datagrid('endEdit', editIndex);
 			editIndex = undefined;
 			return true;
@@ -76,7 +79,7 @@
 		editIndex = undefined;
 	}
 	function accept() { //update到服务器
-	/* try{ */
+		/* try{ */
 		if (endEditing()) {
 			var changes = $('#dg').datagrid('getChanges', 'inserted');
 			if (changes != null && changes.length != 0) {
@@ -89,7 +92,7 @@
 						type : 'post',
 						dataType : 'text',
 						data : {
-							name: changes[i].guest_name, 
+							name : changes[i].guest_name,
 							cellphone : changes[i].guest_cellphone,
 							fixedline : changes[i].guest_fixedline,
 							area : area_id
@@ -120,13 +123,14 @@
 						type : 'post',
 						dataType : 'text',
 						data : {
-							name: changes[i].guest_name, 
+							name : changes[i].guest_name,
 							cellphone : changes[i].guest_cellphone,
 							fixedline : changes[i].guest_fixedline,
 							area : area_id
 						},
 						success : function(data) {
-							if (data != null){}
+							if (data != null) {
+							}
 						},
 						error : function(msg) {
 							alert(msg.getStatus());
@@ -158,35 +162,38 @@
 			}
 			$('#dg').datagrid('acceptChanges');
 		}
-	/* }catch(err){
-		alert(err);
-	} */
-		
+		/* }catch(err){
+			alert(err);
+		} */
+
 	}
 	function reject() {
 		var rows = $('#dg').datagrid('getChanges').length;
-		if( rows > 0 && window.confirm("所有的操作将被取消，是否继续？")){
+		if (rows > 0 && window.confirm("所有的操作将被取消，是否继续？")) {
 			$('#dg').datagrid('rejectChanges');
 			editIndex = undefined;
 		}
 	}
-	function hide(){
+	function hide() {
 		var hide = $('#sDiv').css('display');
-		if(hide == 'none')
+		if (hide == 'none')
 			$('#sDiv').css('display', 'block');
 		else
 			$('#sDiv').css('display', 'none');
 	}
 	//用户刷新或关闭页面时提示有操作未保存
-	window.onbeforeunload = onbeforeunload_handler; 
-    function onbeforeunload_handler(){ 
-    	var rows = $('#dg').datagrid('getChanges').length;
-        var warning="有操作未保存，是否确认操作?";           
-    	if(rows > 0)
-       		return warning;
-    	else
-    		return;
-    }
+	window.onbeforeunload = onbeforeunload_handler;
+	function onbeforeunload_handler() {
+		var rows = $('#dg').datagrid('getChanges').length;
+		var warning = "有操作未保存，是否确认操作?";
+		if (rows > 0)
+			return warning;
+		else
+			return;
+	}
+	function onSelect(){
+		itemChanged = true;
+	}
 </script>
 </head>
 <body>
@@ -268,7 +275,8 @@
 											valueField: 'area_id',
 											textField: 'area_address',
 											url: 'http://localhost:8080/ZHWS/rest/areas',
-											method: 'get'
+											method: 'get',
+											onSelect : onSelect
 										}
 									}">客户地址</th>
 							</tr>
@@ -290,9 +298,9 @@
 												}
 
 								}]" />
-						<br />
-						<label for="search">请输入客户手机号：</label> <input id="sCellphone"
-							name="search" class="easyui-numberbox" style="width:300px"
+						<br /> <label for="search">请输入客户手机号：</label> <input
+							id="sCellphone" name="search" class="easyui-numberbox"
+							style="width:300px"
 							data-options="
 								prompt:'请输入客户手机号...',
 								icons:[{
@@ -306,8 +314,7 @@
 												}
 
 								}]" />
-						<br />
-						<label for="search">请输入客户地址：</label> <input id="sAddress"
+						<br /> <label for="search">请输入客户地址：</label> <input id="sAddress"
 							name="search" class="easyui-textbox" style="width:300px"
 							data-options="
 								prompt:'请输入客户地址...',

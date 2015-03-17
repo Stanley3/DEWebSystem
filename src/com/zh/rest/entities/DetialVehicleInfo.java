@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class DetialVehicleInfo implements Serializable{
 	public static final long serialVersionUID = -3396866965380607637L;
+	private String vehicle_id;
 	private String vehicle_sn;
 	private String vehicle_vin;
 	private String vehicle_phone;
@@ -17,13 +18,15 @@ public class DetialVehicleInfo implements Serializable{
 	private String guest_name;
 	private String guest_cellphone;
 	private String area_address;
+	private String vehicle_remark;
 	
 	public DetialVehicleInfo(){}
 
-	public DetialVehicleInfo(String vehicle_sn, String vehicle_vin,
+	public DetialVehicleInfo(String vehicle_id, String vehicle_sn, String vehicle_vin,
 			String vehicle_phone, int vehicle_lock, double vehicle_arrearage,
 			int vehicle_status, String vehicle_version, String guest_name,
-			String guest_cellphone, String guest_address) {
+			String guest_cellphone, String guest_address, String vehicle_remark) {
+		this.vehicle_id = vehicle_id;
 		this.vehicle_sn = vehicle_sn;
 		this.vehicle_vin = vehicle_vin;
 		this.vehicle_phone = vehicle_phone;
@@ -34,6 +37,15 @@ public class DetialVehicleInfo implements Serializable{
 		this.guest_name = guest_name;
 		this.guest_cellphone = guest_cellphone;
 		this.area_address = guest_address;
+		this.vehicle_remark = vehicle_remark;
+	}
+
+	public String getVehicle_id() {
+		return vehicle_id;
+	}
+
+	public void setVehicle_id(String vehicle_id) {
+		this.vehicle_id = vehicle_id;
 	}
 
 	public String getVehicle_sn() {
@@ -114,6 +126,14 @@ public class DetialVehicleInfo implements Serializable{
 
 	public void setArea_address(String guest_address) {
 		this.area_address = guest_address;
+	}
+
+	public String getVehicle_remark() {
+		return vehicle_remark;
+	}
+
+	public void setVehicle_remark(String vehicle_remark) {
+		this.vehicle_remark = vehicle_remark;
 	}
 	
 	

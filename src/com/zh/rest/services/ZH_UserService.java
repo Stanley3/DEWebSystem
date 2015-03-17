@@ -2,6 +2,7 @@ package com.zh.rest.services;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.research.ws.wadl.Request;
 import com.zh.rest.dao.ZH_UserDao;
 import com.zh.rest.entities.ZH_User;
 
@@ -51,6 +53,7 @@ public class ZH_UserService {
 	public Response validateUser(@FormParam("name") String name, 
 								 @FormParam("password") String password){
 		System.out.println("-------------就收到用户的输入参数为：" + name + ", " + password + "----------------");
+		
 		return Response.status(200).entity(userDao.validateUser(name, password)).build();
 	}
 	
