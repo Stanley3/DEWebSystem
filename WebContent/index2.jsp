@@ -100,7 +100,7 @@ body {
 									<td valign="top">
 										<div class="easyui-panel" title="ÕÊºÅµÇÂ¼"
 											style="width:400px;padding:30px 60px; font-size:18px">
-											<form id="login" method="post" action="LoginServlet">
+											<form id="login" method="post" action="pages/Test.jsp">
 												<div style="margin-bottom:20px">
 													ÓÃ»§Ãû£º <input class="easyui-textbox"
 														style="width:60%;height:32px" name="name" id="name"
@@ -116,10 +116,9 @@ body {
 														style="width:60%;height:32px" />
 												</div>
 												<div>
-													<!-- <a href="javascript:void(0)" class="easyui-linkbutton"
+													<a href="javascript:void(0)" class="easyui-linkbutton"
 														onclick="submitForm()"
-														style="width:100%;height:32px;"><strong style="font-size:16px">µÇ&nbsp;&nbsp;Â¼</strong></a> -->
-													<input type="submit" class="easyui-linkbutton" id="submit" style="width:100%;height:32px" value="µÇÂ¼" />
+														style="width:100%;height:32px;"><strong style="font-size:16px">µÇ&nbsp;&nbsp;Â¼</strong></a>
 												</div>
 											</form>
 										</div>
