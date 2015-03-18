@@ -15,7 +15,29 @@
 <script type="text/javascript"
 	src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-	
+	$(function() {
+		$('#oldPwd').validatebox({
+			required : true,
+			missingMessage : '请输入原密码'
+		});
+		$('#newPwd').validatebox({
+			required : true,
+			missingMessage : '请输入新密码'
+		});
+		$('#agaginNew').validatebox({
+			required : true,
+			missingMessage : '请再次输入新密码',
+			validType : "equals[('#newPwd')]"
+		});
+		$.extend($.fn.validatebox.defaults.rules, {
+			equals : {
+				validator : function(value, param) {
+					return value == $(param[0]).val();
+				},
+				message : '两次输入不匹配.'
+			}
+		});
+	})
 </script>
 </head>
 <body>
@@ -42,18 +64,38 @@
 						<li><a href="resetPwd.jsp" class="selected"><span>修改密码</span></a></li>
 					</ul>
 				</div>
-				
+
 				<div>
-					<label for="oldPwd">请输入原密码：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="easyui-textbox" id="oldPwd" style="width:200px;hegith=32px" type="password"/>
-					<br />
-					<label for="newPwd">请输入新密码：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="easyui-textbox" id="newPwd" style="width:200px;hegith=32px" type="password"/>
-					<br />
-					<label for="agaginNew">请再次输入新密码：</label>
-					<input class="easyui-textbox" id="againNew" style="width:200px;hegith=32px" type="password"/>
+					<form id="reset" method="post" action="resetPwd">
+						<table>
+							<tr>
+								<td><label for="oldPwd">请输入原密码：</label></td>
+								<td><input class="easyui-validatebox" id="oldPwd"
+									style="width:200px;hegith=32px" type="password" /></td>
+							</tr>
+							<tr>
+								<td><label for="newPwd">请输入新密码：</label></td>
+								<td><input class="easyui-validatebox" id="newPwd"
+									style="width:200px;hegith=32px" type="password" /></td>
+							</tr>
+							<tr>
+								<td><label for="agaginNew">请再次输入新密码：</label></td>
+								<td><input class="easyui-validatebox" id="againNew"
+									style="width:200px;hegith=32px" type="password" /></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input class="easyui-linkbutton"
+									type="submit" id="submit" value="修改"
+									style="height:32px;width:80px" /> &nbsp;&nbsp; <input
+									class="easyui-linkbutton" type="reset" id="reset" value="重置"
+									style="height:32px;width:80px" "/> &nbsp;&nbsp; <input
+									class="easyui-linkbutton" type="button" id="back" value="返回"
+									style="height:32px;width:80px" /></td>
+							</tr>
+						</table>
+					</form>
 				</div>
-				
+
 				<div id="body_footer">
 					<div id="bottom_left">
 						<div id="bottom_right"></div>
