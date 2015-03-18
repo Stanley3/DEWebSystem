@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=gbk"
-	pageEncoding="gbk"%>
+	pageEncoding="gbk" import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder
+import javax.ws.rs.client.Entity
+import javax.ws.rs.client.WebTarget
+import javax.ws.rs.core.Form
+import javax.ws.rs.core.MediaType %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,15 +21,15 @@
 	src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#oldPwd').validatebox({
+		$('#oldPwd').textbox({
 			required : true,
 			missingMessage : '请输入原密码'
 		});
-		$('#newPwd').validatebox({
+		$('#newPwd').textbox({
 			required : true,
 			missingMessage : '请输入新密码'
 		});
-		$('#agaginNew').validatebox({
+		$('#againNew').textbox({
 			required : true,
 			missingMessage : '请再次输入新密码',
 			validType : "equals[('#newPwd')]"
@@ -41,6 +46,22 @@
 </script>
 </head>
 <body>
+<%boolean equals = false;
+	String tips = "";
+	String newPwd = request.getParameter("newPwd");
+	String oldPwd = request.getParameter("oldPwd");
+	if(newPwd != null && !newPwd.isEmpty() && oldPwd != null && !oldPwd.isEmpty()){
+		String pwd = (String)session.getAttribute("pwd");
+		if(oldPwd.equals(pwd))
+			equals = true;
+		if(!equals){
+			tips = "<label style=\"color:red\">请输入您现在的密码</label>";
+			return;
+		} 
+		request.setAttribute("newPwd", newPwd);
+		response.sendRedirect("resetPwd");	
+}
+%>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -66,21 +87,23 @@
 				</div>
 
 				<div>
-					<form id="reset" method="post" action="resetPwd">
+					<form id="reset" method="post" action="resetPwd.jsp">
 						<table>
 							<tr>
 								<td><label for="oldPwd">请输入原密码：</label></td>
-								<td><input class="easyui-validatebox" id="oldPwd"
-									style="width:200px;hegith=32px" type="password" /></td>
+								<td><input class="easyui-textbox" id="oldPwd"
+									style="width:200px;hegith=32px" type="password" />
+									<%=tips %>
+									</td>
 							</tr>
 							<tr>
 								<td><label for="newPwd">请输入新密码：</label></td>
-								<td><input class="easyui-validatebox" id="newPwd"
+								<td><input class="easyui-textbox" id="newPwd"
 									style="width:200px;hegith=32px" type="password" /></td>
 							</tr>
 							<tr>
-								<td><label for="agaginNew">请再次输入新密码：</label></td>
-								<td><input class="easyui-validatebox" id="againNew"
+								<td><label for="againNew">请再次输入新密码：</label></td>
+								<td><input class="easyui-textbox" id="againNew"
 									style="width:200px;hegith=32px" type="password" /></td>
 							</tr>
 							<tr>

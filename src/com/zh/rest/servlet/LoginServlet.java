@@ -13,9 +13,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.zh.rest.dao.ZH_UserDao;
 import com.zh.rest.entities.ZH_User;
 
 public class LoginServlet extends HttpServlet{
