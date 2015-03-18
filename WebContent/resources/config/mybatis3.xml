@@ -13,9 +13,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.zh.rest.entities.DetialVehicleInfo" alias="detialVehicleInfo"/>
 	</typeAliases>
 	<mappers >
-		<mapper url="file:///f:/MyWorkpalce/ZHWS/WebContent/resources/mappers/zh_guest.xml"/>
-		<mapper url="file:///f:/MyWorkpalce/ZHWS/WebContent/resources/mappers/zh_area.xml"/>
-		<mapper url="file:///f:/MyWorkpalce/ZHWS/WebContent/resources/mappers/zh_vehicle.xml"/>
-		<mapper url="file:///f:/MyWorkpalce/ZHWS/WebContent/resources/mappers/zh_user.xml" />
+		<mapper url="file:///e:/MyWorkspaces/ZHWS/WebContent/resources/mappers/zh_guest.xml"/>
+		<mapper url="file:///e:/MyWorkspaces/ZHWS/WebContent/resources/mappers/zh_area.xml"/>
+		<mapper url="file:///e:/MyWorkspaces/ZHWS/WebContent/resources/mappers/zh_vehicle.xml"/>
+		<mapper url="file:///e:/MyWorkspaces/ZHWS/WebContent/resources/mappers/zh_user.xml" />
 	</mappers>
 </configuration>

@@ -49,11 +49,16 @@ public class LoginFilter implements Filter {
 			HttpSession session = req.getSession();
 			String sAttr = (String) session.getAttribute("userid");
 			System.out.println("获取时 : " + sAttr);
+			String contextPath = ((HttpServletResponse) response).encodeRedirectURL(req.getContextPath());
+			System.out.println("当前上下文：" + ((HttpServletResponse) response).encodeRedirectURL(req.getContextPath()));
+			System.out.println("当前请求的URL: " +  req.getRequestURL().toString()); 
 			if(sAttr != null){ 
 				chain.doFilter(request, response);
 			}
 			else 
-				request.getRequestDispatcher("http://localhost:8080/ZHWS/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/jump.jsp").forward(request, response);
+				/*((HttpServletResponse) response).sendRedirect(((HttpServletResponse) response).encodeRedirectURL(req.getContextPath() +
+				        "/index.jsp"));*/
 		}
 	}
 

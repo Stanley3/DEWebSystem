@@ -19,58 +19,8 @@ body {
 	rel="stylesheet" />
 <link href="resources/easyui/themes/icon.css" type="text/css"
 	rel="stylesheet" />
-<script type="text/javascript" src="pages/js/jquery.min.js"></script>
-<script type="text/javascript" src="pages/js/jquery.easyui.min.js"></script>
-<script>
-	/* function submitForm(){
-		$('#login').form({
-			url: 'rest/users/validate',
-			onSumit:function(param){
-				param.name = $('#name').val();
-				param.password = $('#password').val();
-			},
-			success:function(data){
-			alert(data);
-			 var data = eval('(' + data + ')');
-				if(data != null)
-					alert("µÇÂ¼³É¹¦£¡" + data.user_id);
-				else
-					alert("µÇÂ¼Ê§°Ü£¡");
-			}});
-			$('#login').submit();
-	} */
-	function submitForm(){
-		if(!$('#login').form('validate'))
-			return ;
-		$.ajax({
-			url: "http://localhost:8080/ZHWS/rest/users/validate",
-			type: "post",
-			data: {name: $('#name').val(), password:$('#password').val()},
-			dataType: "json",
-			success:function(data){
-				if(data != null && data.user_id != null){
-					/* var obj;
-					try{
-						obj = eval('(' + data + ')');
-					}catch(err){
-						alert(err + "dataµÄÀàÐÍÎª" + typeof(data) + data.user_id);
-					}
-					if(obj.user_id != null)
-						alert("ÓÃ»§" + obj.user_id + "µÇÂ¼³É¹¦£¡");
-					else
-						alert("µÇÂ¼Ê§°Ü£¡"); */
-					//alert(data.user_role);
-					window.location = "pages/area.html"; //Â·¾¶Ìø×ª
-				}
-				else
-					alert("µÇÂ¼Ê§°Ü£¡");
-			},
-			error:function(msg){
-				alert("µÇÂ¼Ê§°Ü£¡" + msg.status);
-			}
-		});
-	}
-</script>
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.easyui.min.js"></script>
 </head>
 
 <body>

@@ -44,6 +44,10 @@
   	<url-pattern>/pages/*</url-pattern>
   </filter-mapping>
   
+  <session-config>
+  	<session-timeout>10</session-timeout>
+  </session-config>
+  
   <resource-ref>
     <description>Database resource rest demo web application </description>
     <res-ref-name>jdbc/restDemoDB</res-ref-name>
