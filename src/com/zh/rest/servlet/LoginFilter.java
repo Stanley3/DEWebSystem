@@ -13,20 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.RequestToViewNameTranslator;
-
 /**
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter("/LoginFilter")
 public class LoginFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public LoginFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public LoginFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -38,27 +36,32 @@ public class LoginFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 
 		// pass the request along the filter chain
-		if(request instanceof HttpServletRequest && 
-				response instanceof HttpServletResponse){
-			HttpServletRequest req = (HttpServletRequest)request;
+		if (request instanceof HttpServletRequest
+				&& response instanceof HttpServletResponse) {
+			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
-			String sAttr = (String) session.getAttribute("userid");
-			System.out.println("获取时 : " + sAttr);
-			String contextPath = ((HttpServletResponse) response).encodeRedirectURL(req.getContextPath());
-			System.out.println("当前上下文：" + ((HttpServletResponse) response).encodeRedirectURL(req.getContextPath()));
-			System.out.println("当前请求的URL: " +  req.getRequestURL().toString()); 
-			if(sAttr != null){ 
-				chain.doFilter(request, response);
-			}
-			else 
-				request.getRequestDispatcher("/jump.jsp").forward(request, response);
-				/*((HttpServletResponse) response).sendRedirect(((HttpServletResponse) response).encodeRedirectURL(req.getContextPath() +
-				        "/index.jsp"));*/
+			if (session != null) {
+				String sAttr = (String) session.getAttribute("user_id");
+				System.out.println("获取时 : " + sAttr);
+				System.out.println("当前上下文："
+						+ ((HttpServletResponse) response)
+								.encodeRedirectURL(req.getContextPath()));
+				System.out.println("当前请求的URL: "
+						+ req.getRequestURL().toString());
+				if (sAttr != null) {
+					chain.doFilter(request, response);
+				} else
+					request.getRequestDispatcher("/jump.jsp").forward(request,
+							response);
+			} else
+				request.getRequestDispatcher("/jump.jsp").forward(request,
+						response);
 		}
 	}
 

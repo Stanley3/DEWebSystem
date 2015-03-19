@@ -34,6 +34,14 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>resetPwd</servlet-name>
+  	<servlet-class>com.zh.rest.servlet.ResetPwd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>resetPwd</servlet-name>
+  	<url-pattern>/pages/resetPwd</url-pattern>
+  </servlet-mapping>
   
   <filter>
   	<filter-name>filter</filter-name>

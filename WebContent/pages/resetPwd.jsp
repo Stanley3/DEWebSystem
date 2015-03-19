@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=gbk"
-	pageEncoding="gbk" import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder
-import javax.ws.rs.client.Entity
-import javax.ws.rs.client.WebTarget
-import javax.ws.rs.core.Form
-import javax.ws.rs.core.MediaType %>
+	pageEncoding="gbk"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<title>测试平台</title>
+<title>重设密码-驾驶员培训科目三模拟考试系统管理后台</title>
 <link rel="stylesheet" href="../resources/template/css/style.css"
 	type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet"
@@ -42,26 +37,29 @@ import javax.ws.rs.core.MediaType %>
 				message : '两次输入不匹配.'
 			}
 		});
-	})
+		
+		
+	});
+	
+	function test(){
+		alert($('#oldPwd').val());
+	}
 </script>
 </head>
 <body>
-<%boolean equals = false;
-	String tips = "";
-	String newPwd = request.getParameter("newPwd");
-	String oldPwd = request.getParameter("oldPwd");
-	if(newPwd != null && !newPwd.isEmpty() && oldPwd != null && !oldPwd.isEmpty()){
-		String pwd = (String)session.getAttribute("pwd");
-		if(oldPwd.equals(pwd))
-			equals = true;
-		if(!equals){
-			tips = "<label style=\"color:red\">请输入您现在的密码</label>";
-			return;
-		} 
-		request.setAttribute("newPwd", newPwd);
-		response.sendRedirect("resetPwd");	
-}
-%>
+	<%
+		String tips = "";
+		Cookie c[] = request.getCookies();
+		if (c != null)
+			for (int i = 0; i < c.length; ++i) {
+				if (c[i].getName().equals("result")
+						&& c[i].getValue().equals("false")) {
+					tips = "<label style=\"color:red\">请输入您的密码</label>";
+					c[i].setValue("true");
+					break;
+				}
+			}
+	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -70,7 +68,7 @@ import javax.ws.rs.core.MediaType %>
 		</div>
 		<div class="col w5 last right bottomlast">
 			<p class="last">
-				当前用户： <span class="strong">李二刀</span> <a href="">修改密码</a> <a href="">退出</a>
+				当前用户： <span class="strong">李二刀</span> <a href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
 			</p>
 		</div>
 		<div class="clear"></div>
@@ -87,18 +85,17 @@ import javax.ws.rs.core.MediaType %>
 				</div>
 
 				<div>
-					<form id="reset" method="post" action="resetPwd.jsp">
+					<form id="reset" method="post" action="resetPwd">
 						<table>
 							<tr>
 								<td><label for="oldPwd">请输入原密码：</label></td>
-								<td><input class="easyui-textbox" id="oldPwd"
-									style="width:200px;hegith=32px" type="password" />
-									<%=tips %>
-									</td>
+								<td><input class="easyui-textbox" id="oldPwd" name="oldPwd"
+									style="width:200px;hegith=32px" type="password" /> <%=tips%>
+								</td>
 							</tr>
 							<tr>
 								<td><label for="newPwd">请输入新密码：</label></td>
-								<td><input class="easyui-textbox" id="newPwd"
+								<td><input class="easyui-textbox" id="newPwd" name="newPwd"
 									style="width:200px;hegith=32px" type="password" /></td>
 							</tr>
 							<tr>
@@ -109,9 +106,9 @@ import javax.ws.rs.core.MediaType %>
 							<tr>
 								<td colspan="2"><input class="easyui-linkbutton"
 									type="submit" id="submit" value="修改"
-									style="height:32px;width:80px" /> &nbsp;&nbsp; <input
+									style="height:32px;width:80px" onclick="test()"/> &nbsp;&nbsp; <input
 									class="easyui-linkbutton" type="reset" id="reset" value="重置"
-									style="height:32px;width:80px" "/> &nbsp;&nbsp; <input
+									style="height:32px;width:80px" /> &nbsp;&nbsp; <input
 									class="easyui-linkbutton" type="button" id="back" value="返回"
 									style="height:32px;width:80px" /></td>
 							</tr>

@@ -37,9 +37,10 @@ public class LoginServlet extends HttpServlet{
 		form.param("password", password);
 		user = target.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE), ZH_User.class);
 		if(user != null && user.getUser_id() != null){
-			session.setAttribute("userid", user.getUser_id());
-			System.out.println("×¢ÈëÊ±: " + session.getAttribute("userid"));
-			resp.setHeader("refresh", "0;URL=pages/area.html");
+			session.setAttribute("user_id", user.getUser_id());
+			session.setAttribute("pwd", user.getUser_password());
+			session.setAttribute("name", user.getUser_name());
+			resp.setHeader("refresh", "0;URL=pages/admin.jsp");
 		}
 	}
 }

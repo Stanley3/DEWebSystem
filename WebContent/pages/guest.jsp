@@ -1,17 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=GBK"
+	pageEncoding="GBK"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-<title>管理平台</title>
+<title>客户登录-驾驶员培训科目三模拟考试系统管理后台</title>
 <link rel="stylesheet" href="../resources/template/css/style.css"
 	type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet"
 	href="../resources/easyui/themes/default/easyui.css" type="text/css" />
 <link rel="stylesheet" href="../resources/easyui/themes/icon.css"
 	type="text/css" />
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var pager = $('#dg').datagrid().datagrid('getPager');
@@ -197,6 +198,7 @@
 </script>
 </head>
 <body>
+<%String user_name = (String)session.getAttribute("name"); %>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -205,7 +207,7 @@
 		</div>
 		<div class="col w5 last right bottomlast">
 			<p class="last">
-				当前用户： <span class="strong">李二刀</span> <a href="">修改密码</a> <a href="">退出</a>
+				当前用户： <span class="strong"><%=user_name %></span> <a href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
 			</p>
 		</div>
 		<div class="clear"></div>
@@ -217,11 +219,11 @@
 					<div id="left"></div>
 					<div id="right"></div>
 					<ul>
-						<li><a href="vehicle.html"><span>车辆管理</span></a></li>
-						<li><a href="arrearage.html"><span>欠费管理</span></a></li>
-						<li><a href="admin.html"><span>超管管理</span></a></li>
-						<li><a href="area.html"><span>地区管理</span></a></li>
-						<li><a href="guest.html" class="selected"><span>客户管理</span></a></li>
+						<li><a href="vehicle.jsp"><span>车辆管理</span></a></li>
+						<li><a href="arrearage.jsp"><span>欠费管理</span></a></li>
+						<li><a href="admin.jsp"><span>超管管理</span></a></li>
+						<li><a href="area.jsp"><span>地区管理</span></a></li>
+						<li><a href="guest.jsp" class="selected"><span>客户管理</span></a></li>
 					</ul>
 					<div class="clear"></div>
 				</div>

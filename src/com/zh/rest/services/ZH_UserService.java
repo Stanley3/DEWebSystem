@@ -63,9 +63,10 @@ public class ZH_UserService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response updateUserById(@PathParam("id") String id, 
 								   @FormParam("name") String name,
-								   @FormParam("role") String role){
+								   @FormParam("role") String role,
+								   @FormParam("pwd") String pwd){
 		System.out.println("更新方法得到执行！");
-		ZH_User user = new ZH_User(id, name, null, role);
+		ZH_User user = new ZH_User(id, name, pwd, role);
 		if(userDao.updateUser(user) == 1)
 			return Response.status(200).entity("true").build();
 		else
