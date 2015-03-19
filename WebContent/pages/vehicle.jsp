@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="../resources/easyui/themes/icon.css"
 	type="text/css" />
 <script type="text/javascript" src="../resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
@@ -26,19 +27,20 @@
 		var phone = $('#sVphone').textbox('getValue');
 		var area = $('#sArea').combobox('getValue');
 		var lock = $('#sLock').combobox('getValue');
-		if(vin || sn || phone || area || lock){
-			alert("vin="+vin + ", sn=" + ", " + phone + ", area=" + area + ", lock=" + lock);
+		if (vin || sn || phone || area || lock) {
+			alert("vin=" + vin + ", sn=" + ", " + phone + ", area=" + area
+					+ ", lock=" + lock);
 			$('#dg').datagrid({
-			url : 'http://localhost:8080/ZHWS/rest/vehicles',
-			method : 'get',
-			queryParams : {
-				vin : vin,
-				sn  : sn,
-				phone : phone,
-				area : area,
-				lock : lock
-			}
-		});
+				url : 'http://localhost:8080/ZHWS/rest/vehicles',
+				method : 'get',
+				queryParams : {
+					vin : vin,
+					sn : sn,
+					phone : phone,
+					area : area,
+					lock : lock
+				}
+			});
 			$('#dg').datagrid('reload');
 		}
 	}
@@ -215,7 +217,9 @@
 </script>
 </head>
 <body>
-<%String user_name = (String)session.getAttribute("name"); %>
+	<%
+		String user_name = (String) session.getAttribute("name");
+	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -224,7 +228,8 @@
 		</div>
 		<div class="col w5 last right bottomlast">
 			<p class="last">
-				当前用户： <span class="strong"><%=user_name %></span> <a href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
+				当前用户： <span class="strong"><%=user_name%></span> <a
+					href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
 			</p>
 		</div>
 		<div class="clear"></div>
@@ -341,9 +346,10 @@
 								<td><label for="sVin">请输入车架号：</label> <input id="sVin"
 									name="sVin" class="easyui-textbox" style="width:150px" /></td>
 								<td><label for="sSn">请输入产品序号：</label> <input id="sSn"
-									name="sSn" class="easyui-numberbox" style="width:150px"/></td>
+									name="sSn" class="easyui-numberbox" style="width:150px" /></td>
 								<td><label for="sVphone">请输入机器手机：</label> <input
-									id="sVphone" name="sVphone" class="easyui-numberbox" style="width:150px"/></td>
+									id="sVphone" name="sVphone" class="easyui-numberbox"
+									style="width:150px" /></td>
 								<td><label for="sArea">请选择地区：</label> <input id="sArea"
 									name="sArea" class="easyui-combobox" style="width:150px"
 									data-options="
@@ -365,47 +371,48 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="5" style="align:center">
-								<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="searchAndReload()" style="width:80px">查询</a>
-									&nbsp;&nbsp;&nbsp;
-								<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-clear'" onclick="clear()" style="width:80px">清空</a>
-								</td>
+								<td colspan="5" style="align:center"><a href="#"
+									class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+									onclick="searchAndReload()" style="width:80px">查询</a>
+									&nbsp;&nbsp;&nbsp; <a href="#" class="easyui-linkbutton"
+									data-options="iconCls:'icon-clear'" onclick="clear()"
+									style="width:80px">清空</a></td>
 							</tr>
 						</table>
 					</div>
-				</div>
-				<div id="tb" style="height:auto">
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove',plain:true"
-						onclick="removeit()">删除</a> <a href="javascript:void(0)"
-						class="easyui-linkbutton"
-						data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search',plain:true" onclick="hide()">搜索</a>
-				</div>
 
-				<a href="" class="dropdown_button"><small class="icon plus"></small></a>
+					<div id="tb" style="height:auto">
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-remove',plain:true"
+							onclick="removeit()">删除</a> <a href="javascript:void(0)"
+							class="easyui-linkbutton"
+							data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-search',plain:true" onclick="hide()">搜索</a>
+					</div>
 
-
-
-				<div class="clear"></div>
+					<a href="" class="dropdown_button"><small class="icon plus"></small></a>
 
 
-				<div class="clear"></div>
 
-				<div class="clear"></div>
+					<div class="clear"></div>
 
 
-				<div id="body_footer">
-					<div id="bottom_left">
-						<div id="bottom_right"></div>
+					<div class="clear"></div>
+
+					<div class="clear"></div>
+
+
+					<div id="body_footer">
+						<div id="bottom_left">
+							<div id="bottom_right"></div>
+						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>

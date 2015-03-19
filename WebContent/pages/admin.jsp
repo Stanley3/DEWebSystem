@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="../resources/easyui/themes/icon.css"
 	type="text/css" />
 <script type="text/javascript" src="../resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	var editIndex = undefined;
 	$(function() {
@@ -194,7 +195,9 @@
 </script>
 </head>
 <body>
-<%String user_name = (String)session.getAttribute("name"); %>
+	<%
+		String user_name = (String) session.getAttribute("name");
+	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -203,12 +206,13 @@
 		</div>
 		<div class="col w5 last right bottomlast">
 			<p class="last">
-				当前用户： <span class="strong"><%=user_name %></span> <a href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
+				当前用户： <span class="strong"><%=user_name%></span> <a
+					href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
 			</p>
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div id="wrapper" style="height:90%">
+	<div id="wrapper">
 		<div id="minwidth">
 			<div id="holder">
 				<div id="menu">
@@ -224,8 +228,8 @@
 					<div class="clear"></div>
 				</div>
 
-				<div class="content2" style="height:90%">
-					<table id="dg" 
+				<div class="content">
+					<table id="dg"
 						data-options="
 								rownumbers:true,
 								singleSelect:true,
@@ -257,11 +261,11 @@
 							</tr>
 						</thead>
 					</table>
-				</div>
-				<div id="sDiv" style="display:none">
-					<label for="search">请输入用户名：</label> <input id="sName" name="search"
-						class="easyui-textbox" style="width:300px"
-						data-options="
+
+					<div id="sDiv" style="display:none">
+						<label for="search">请输入用户名：</label> <input id="sName"
+							name="search" class="easyui-textbox" style="width:300px"
+							data-options="
 								prompt:'请输入用户名...',
 								icons:[{
 									iconCls: 'icon-search',
@@ -273,9 +277,9 @@
 												}
 
 								}]" />
-					<br /> <label for="search">请输入角色：</label> <input id="sRole"
-						name="search" class="easyui-textbox" style="width:300px"
-						data-options="
+						<br /> <label for="search">请输入角色：</label> <input id="sRole"
+							name="search" class="easyui-textbox" style="width:300px"
+							data-options="
 								prompt:'请输入角色...',
 								icons:[{
 									iconCls: 'icon-search',
@@ -287,43 +291,32 @@
 												}
 
 								}]" />
-				</div>
-				<div id="tb" style="height:auto">
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-remove',plain:true"
-						onclick="removeit()">删除</a> <a href="javascript:void(0)"
-						class="easyui-linkbutton"
-						data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton"
-						data-options="iconCls:'icon-search',plain:true" onclick="hide()">搜索</a>
-				</div>
-				<a href="" class="dropdown_button"><small class="icon plus"></small></a>
+					</div>
+					<div id="tb" style="height:auto">
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-add',plain:true" onclick="append()">添加</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-remove',plain:true"
+							onclick="removeit()">删除</a> <a href="javascript:void(0)"
+							class="easyui-linkbutton"
+							data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							data-options="iconCls:'icon-search',plain:true" onclick="hide()">搜索</a>
+					</div>
 
-
-
-				<div class="clear"></div>
-
-
-				<div class="clear"></div>
-
-				<div class="clear"></div>
-
-
-				<div id="body_footer">
-					<div id="bottom_left">
-						<div id="bottom_right"></div>
+					<div id="body_footer">
+						<div id="bottom_left">
+							<div id="bottom_right"></div>
+						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 	<div id="footer">
-		<p class="last" style="align:bottom">
+		<p class="last">
 			Copyright 2009 - Gray Admin Template - Created by <a href="">Passatgt</a>
 		</p>
 	</div>

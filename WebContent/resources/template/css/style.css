@@ -24,7 +24,6 @@ padding:0 0 0px;
 width:100%;
 min-width:700px;
 margin:0 auto;
-height:80%
 }
 
 * html #minwidth {border-left:700px solid #fff; position:relative; float:left; z-index:1;background:#e4e4e4;}
@@ -71,7 +70,6 @@ text-align:center;
 width:100%;
 padding:5px 0 5px 0;
 background:transparent;
-height:10%
 }
 
 #footer p {
@@ -706,7 +704,7 @@ a.logo {display:block;float:left;padding:4px 0 0 0;}
 
 /*-------------------------OTHERS-------------------------*/
 .novisible {display:none;}
-p.last {margin:0px;alian:bottom}
+p.last {margin:0px}
 .clear,br {clear:both;font-size:0px;display:block;}
 .buttons_demo a {margin:0 24px 10px 0;}
 /*-------------------------OTHERS-------------------------*/
@@ -862,3 +860,8 @@ a.button .icon {background-image:url(../images/icons_gray.png);}
 .icon.arrow_down{background-position:-205px -445px}
 .icon.arrow_up{background-position:-253px -445px}
 /*-------------------------ICONS-------------------------*/
+/*-------------------------------------------------------*/
+.content{
+	height:500px;
+	background-color:#F4F4F4;
+}

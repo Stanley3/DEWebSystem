@@ -27,10 +27,10 @@ body {
 	<table width="100%" border="0" align="center" cellpadding="0"
 		cellspacing="0">
 		<tr>
-			<td height="91" align="center" valign="top" bgcolor="#333333"><table
+			<td height="91" align="center" valign="top" bgcolor="#f0f0f0"><table
 					width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td height="60" align="center" bgcolor="#135A84"
+						<td height="60" align="center" bgcolor="#F0F0F0"
 							style="padding-left: 20px;"><img
 							src="./resources/images/topbg.png" width="700" height="90" /></td>
 					</tr>
@@ -39,7 +39,7 @@ body {
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td height="465" align="center" bgcolor="#135A84"><table
+			<td height="465" align="center" bgcolor="F0F0F0"><table
 					width="285" border="0" bgcolor="#FFFFFF" cellspacing="5"
 					cellpadding="0">
 					<tr>
@@ -83,7 +83,7 @@ body {
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td height="50" align="center" bgcolor="#135A84"
+			<td height="50" align="center" bgcolor="#f0f0f0"
 				class="index_jianjie">CopyRight HenanZhonghe£¬All Rights
 				Reserved</td>
 		</tr>

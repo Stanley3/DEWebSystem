@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="../resources/easyui/themes/icon.css"
 	type="text/css" />
 <style type="text/css">
-	.hide{display:none}
+.hide {
+	display: none
+}
 </style>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
@@ -151,32 +153,34 @@
 	}
 	function reject() {
 		var rows = $('#dg').datagrid('getChanges').length;
-		if( rows > 0 && window.confirm("所有的操作将被取消，是否继续？")){
+		if (rows > 0 && window.confirm("所有的操作将被取消，是否继续？")) {
 			$('#dg').datagrid('rejectChanges');
 			editIndex = undefined;
 		}
 	}
-	function hide(){
+	function hide() {
 		var hide = $('#sDiv').css('display');
-		if(hide == 'none')
+		if (hide == 'none')
 			$('#sDiv').css('display', 'block');
 		else
 			$('#sDiv').css('display', 'none');
 	}
 	//用户刷新或关闭页面时提示有操作未保存
-	window.onbeforeunload = onbeforeunload_handler; 
-    function onbeforeunload_handler(){ 
-    	var rows = $('#dg').datagrid('getChanges').length;
-        var warning="有操作未保存，是否确认操作?";           
-    	if(rows > 0)
-       		return warning;
-    	else
-    		return;
-    }  
+	window.onbeforeunload = onbeforeunload_handler;
+	function onbeforeunload_handler() {
+		var rows = $('#dg').datagrid('getChanges').length;
+		var warning = "有操作未保存，是否确认操作?";
+		if (rows > 0)
+			return warning;
+		else
+			return;
+	}
 </script>
 </head>
 <body>
-<%String user_name = (String)session.getAttribute("name"); %>
+	<%
+		String user_name = (String) session.getAttribute("name");
+	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
 			<a href="" class="logo"> <img
@@ -185,7 +189,8 @@
 		</div>
 		<div class="col w5 last right bottomlast">
 			<p class="last">
-				当前用户： <span class="strong"><%=user_name %></span> <a href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
+				当前用户： <span class="strong"><%=user_name%></span> <a
+					href="resetPwd.jsp">修改密码</a> <a href="exit.jsp">退出</a>
 			</p>
 		</div>
 		<div class="clear"></div>
@@ -251,28 +256,27 @@
 						<a href="javascript:void(0)" class="easyui-linkbutton"
 							data-options="iconCls:'icon-undo',plain:true" onclick="reject()">取消</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton"
-							data-options="iconCls:'icon-search',plain:true"
-							onclick="hide()">搜索</a>
+							data-options="iconCls:'icon-search',plain:true" onclick="hide()">搜索</a>
 					</div>
 
-				<a href="" class="dropdown_button"><small class="icon plus"></small></a>
+					<a href="" class="dropdown_button"><small class="icon plus"></small></a>
 
 
 
-				<div class="clear"></div>
+					<div class="clear"></div>
 
 
-				<div class="clear"></div>
+					<div class="clear"></div>
 
-				<div class="clear"></div>
+					<div class="clear"></div>
 
 
-				<div id="body_footer">
-					<div id="bottom_left">
-						<div id="bottom_right"></div>
+					<div id="body_footer">
+						<div id="bottom_left">
+							<div id="bottom_right"></div>
+						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
