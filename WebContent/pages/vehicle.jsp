@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
 <title>车辆管理-驾驶员培训科目三模拟考试系统管理后台</title>
+<style type="text/css">
+	th{
+		height: 60px;
+	}
+</style>
 <link rel="stylesheet" href="../resources/template/css/style.css"
 	type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet"
@@ -64,7 +69,7 @@
 			return false;
 		}
 	}
-	function onClickRow(index) {
+	function onDblClickRow(index) {
 		if (editIndex != index) {
 			if (endEditing()) {
 				$('#dg').datagrid('selectRow', index).datagrid('beginEdit',
@@ -214,6 +219,38 @@
 		//当combobox被选择时，设置itemChanged的值为true
 		itemChanged = true;
 	}
+	function editStyler(value, row, index){
+		return 'background: url(../resources/images/edit.png) no-repeat center';
+	}
+	function msgStyler(value, row, index){
+		return 'background: url(../resources/images/sms.png) no-repeat center';
+	}
+	function posStyler(value, row, index){
+		return 'background: url(../resources/images/map.png) no-repeat center';
+	}
+	function statusStyler(value, row, index){
+		if(value == 0){
+			return 'background: url(../resources/images/off.png) no-repeat center;color:#ffffff';
+		} else if(value > 0){
+			return 'background: url(../resources/images/on.png) no-repeat center;color:#ffffff';
+		}
+	}
+	function lockStyler(value, row, index){
+		if(value == 0){
+			return 'background: url(../resources/images/unlock.png) no-repeat center;color:#ffffff';
+		}else if(value > 0){
+			return 'background: url(../resources/images/lock.png) no-repeat center;color:#ffffff';
+		}
+	}
+	function onClickCell(index, field, value){
+		if(field == 'edit')
+			onDblClickRow(index);
+		else if(field == 'sendMsg'){
+			//此处写发送信息相关的代码，应该是一个ajax请求
+		}else if(field == 'position'){
+			//此处写定位相关的代码，应该打开一个新的界面
+		}
+	}
 </script>
 </head>
 <body>
@@ -259,9 +296,10 @@
 						url:'http://localhost:8080/ZHWS/rest/vehicles',
 						method:'get',
 						toolbar: '#tb',
-						onClickRow : onClickRow
+						onDblClickRow : onDblClickRow,
+						onClickCell : onClickCell
 						">
-						<thead>
+						<thead height="100px">
 							<tr>
 								<th data-options="field:'vehicle_id',width:100,hidden:true">客户电话</th>
 								<th
@@ -306,14 +344,20 @@
 										}
 									}">客户名称</th>
 								<th data-options="field:'guest_cellphone',width:100">客户电话</th>
-								<th data-options="field:'vehicle_status',width:100">运行</th>
+								<th data-options="field:'vehicle_status',width:100, styler: statusStyler">运行</th>
 								<th
-									data-options="field:'vehicle_lock',width:100, 
+									data-options="field:'vehicle_lock',width:100, styler: lockStyler,
 									editor:{
-										type: 'numberbox',
+										type: 'combobox',
 										options : {
 											required : true,
-											missingMessage : '请输入锁定信息'
+											missingMessage : '请输入锁定信息',
+											valueField: 'code',
+											textField: 'status',
+											data: [
+												{code: 0, status: '未锁定'},
+												{code: 1, status: '锁定'}
+											]
 										}
 									}">锁定</th>
 								<th data-options="field:'area_address',width:100">所在地区</th>
@@ -337,11 +381,14 @@
 											mutiline: true
 										}
 									}">备注</th>
+								<th data-options="field: 'sendMsg', width:50, styler:msgStyler">发信息</th>
+								<th data-options="field: 'position', width:50, styler:posStyler">定位</th>	
+								<th data-options="field: 'edit', width:50, styler:editStyler">修改</th>
 							</tr>
 						</thead>
 					</table>
 					<div id="sDiv" style="display:none">
-						<table style="width:100%">
+						<table style="width:100%;margin:5px; padding:10px;background-color:#ffffff">
 							<tr>
 								<td><label for="sVin">请输入车架号：</label> <input id="sVin"
 									name="sVin" class="easyui-textbox" style="width:150px" /></td>
@@ -370,8 +417,8 @@
 												]" />
 								</td>
 							</tr>
-							<tr>
-								<td colspan="5" style="align:center"><a href="#"
+							<tr >
+								<td colspan="5" align="center" style="padding-top:10px"><a href="#"
 									class="easyui-linkbutton" data-options="iconCls:'icon-search'"
 									onclick="searchAndReload()" style="width:80px">查询</a>
 									&nbsp;&nbsp;&nbsp; <a href="#" class="easyui-linkbutton"
