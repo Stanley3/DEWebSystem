@@ -1,6 +1,8 @@
 package com.zh.rest.services;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -47,10 +49,23 @@ public class ZH_AreaService {
 	
 	@GET 
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-	public Response getAllUsers(@DefaultValue("") @QueryParam("address") String address){
+	public Response getAllUsers(@DefaultValue("") @QueryParam("address") String address,
+								@DefaultValue("0")  @QueryParam("page") String page,
+								@DefaultValue("0")  @QueryParam("rows") String row){
 		System.out.println("查询方法得到执行！");
+		int pages = Integer.valueOf(page);
+		int rows = Integer.valueOf(row);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pages", pages);
+		map.put("rows", rows);
+		int totals = areaDao.getCounts();
+		System.out.println(totals);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("total", totals);
+		result.put("rows", areaDao.getArea(map));
+		System.out.println("pages=" + pages + ", rows=" + rows);
 		if(address.isEmpty())
-			return Response.status(200).entity(areaDao.getArea()).build();
+			return Response.status(200).entity(result).build();
 		else{
 			System.out.println("地址为：" + address);
 			return Response.status(200).entity(areaDao.getQueriedArea(address)).build();

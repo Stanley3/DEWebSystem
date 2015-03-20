@@ -47,7 +47,7 @@
 			return false;
 		}
 	}
-	function onClickRow(index) {
+	function onDblClickRow(index) {
 		if (editIndex != index) {
 			if (endEditing()) {
 				$('#dg').datagrid('selectRow', index).datagrid('beginEdit',
@@ -192,6 +192,13 @@
 		else
 			return;
 	}
+	
+	function onClickCell(index){
+		onDblClickRow(index);
+	}
+	function editStyler(value, row, index){
+		return 'background: url(../resources/images/edit.png) no-repeat center';
+	}
 </script>
 </head>
 <body>
@@ -237,7 +244,8 @@
 								url:'http://localhost:8080/ZHWS/rest/users',
 								method:'get',
 								toolbar: '#tb',
-								onClickRow: onClickRow
+								onDblClickRow: onDblClickRow,
+								onClickCell : onClickCell
 							">
 						<thead>
 							<tr>
@@ -258,6 +266,7 @@
 												]
 											}
 									}">用户角色</th>
+								<th data-options="field: 'edit', width:50, styler:editStyler">修改</th>
 							</tr>
 						</thead>
 					</table>

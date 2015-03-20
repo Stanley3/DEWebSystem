@@ -10,16 +10,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from zh_area
 		where area_id = #{id}
 	</select>
-	<select id="getArea" resultType="zh_area">
-		select
+	<select id="getArea" resultType="zh_area" parameterType="java.util.Map">
+		<!-- declare rows int
+		set @rows = (#{pages}-1)*#{rows}
+		select 
 		<include refid="areaColumns" />
-		from zh_area
+		<choose>
+			<when test="rows == 0">
+				from zh_area
+			</when>
+			<otherwise>
+				from zh_area 
+				limit @rows, #{rows}
+			</otherwise>
+		</choose> -->
+		call area_pagination(#{rows}, (#{pages}-1)*#{rows})
 	</select>
 	<select id="getQueriedArea" resultType="zh_area">
 		select
 		<include refid="areaColumns" />
 		from zh_area
 		where area_address like "%"#{address}"%"
+	</select>
+	<select id="getCounts" resultType="int">
+		select count(area_id) from zh_area
 	</select>
 	<insert id="createArea" parameterType="zh_area">
 		insert into
