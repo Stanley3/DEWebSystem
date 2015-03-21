@@ -11,9 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where guest_id = #{id}
 	</select>
 	<select id="getGuests" resultType="detialGuestInfo">
-		select 
-		<include refid="guestColumns"/>
-		from zh_guest left outer join zh_area on zh_guest.guest_area = zh_area.area_id		
+		call guest_pagination((#{pages}-1)*#{rows}, #{rows})		
+	</select>
+	<select id="getCounts" resultType="int">
+		select count(guest_id) from zh_guest
 	</select>
 	<select id="getQueriedGuests" resultType="detialGuestInfo">
 		select 

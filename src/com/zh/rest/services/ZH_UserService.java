@@ -1,5 +1,7 @@
 package com.zh.rest.services;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -89,10 +91,25 @@ public class ZH_UserService {
 	@GET 
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response getAllUsers(@DefaultValue("") @QueryParam("name") String name,
-								@DefaultValue("") @QueryParam("role") String role){
-		System.out.println("查询方法得到执行！");
+								@DefaultValue("") @QueryParam("role") String role,
+								@DefaultValue("0")  @QueryParam("page") String page,
+								@DefaultValue("0")  @QueryParam("rows") String row){
+		int pages = Integer.valueOf(page);
+		int rows = Integer.valueOf(row);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pages", pages);
+		map.put("rows", rows);
+		int totals = userDao.getCounts();
 		if(name.isEmpty() && role.isEmpty())
-			return Response.status(200).entity(userDao.getUsers()).build();
+			if(rows != 0 && pages != 0){
+				//将返回结果组合成分页工具需要的json格式
+				Map<String, Object> result = new HashMap<String, Object>();
+				result.put("total", totals);
+				result.put("rows", userDao.getUsers(map));
+				return Response.status(200).entity(result).build();
+			}else
+				//返回combobox需要的数据格式
+				return Response.status(200).entity(userDao.getUsers(map)).build();
 		else{
 			System.out.println("用户名为：" + name + ", 角色为: " + role);
 			return Response.status(200).entity(userDao.getQueriedUsers(name, role)).build();

@@ -23,7 +23,7 @@
 	var itemChanged = false;
 	function searchAndReload(name, cellphone, address) {
 		$('#dg').datagrid({
-			url : 'http://localhost:8080/ZHWS/rest/guests',
+			url : '../rest/guests',
 			method : 'get',
 			queryParams : {
 				name : name,
@@ -90,7 +90,7 @@
 				var completed; //确保上次的ajax成功后才进行下次的ajax操作
 				for (i in changes) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/guests',
+						url : '../rest/guests',
 						type : 'post',
 						dataType : 'text',
 						data : {
@@ -118,7 +118,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].guest_id != undefined
 						&& changes[i].guest_id != ""; ++i) {
-					url = "http://localhost:8080/ZHWS/rest/guests/"
+					url = "../rest/guests/"
 							+ changes[i].guest_id;
 					$.ajax({
 						url : url,
@@ -148,7 +148,7 @@
 						&& changes[i].guest_id != undefined
 						&& changes[i].guest_id != ""; ++i) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/guests/'
+						url : '../rest/guests/'
 								+ changes[i].guest_id,
 						type : 'delete',
 						dataType : 'text',
@@ -245,7 +245,7 @@
 						rownumbers:true,
 						singleSelect:true,
 						pagination:true,
-						url:'http://localhost:8080/ZHWS/rest/guests',
+						url:'../rest/guests',
 						method:'get',
 						toolbar: '#tb',
 						onDblClickRow: onDblClickRow,
@@ -288,7 +288,7 @@
 											missingMessage: '请选择客户地址',
 											valueField: 'area_id',
 											textField: 'area_address',
-											url: 'http://localhost:8080/ZHWS/rest/areas',
+											url: '../rest/areas',
 											method: 'get',
 											onSelect : onSelect
 										}

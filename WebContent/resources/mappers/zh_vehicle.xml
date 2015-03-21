@@ -18,12 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where vehicle_id = #{id}
 	</select>
 	<select id="getVehicles" resultType="detialVehicleInfo">
-		select
-		<include refid="detialVehicleColumns" />
-		from 
-		zh_vehicle 
-			left outer join zh_guest on vehicle_guest = guest_id 
-			left outer join zh_area on guest_area = area_id
+		call vehicle_pagination((#{pages}-1)*#{rows}, #{rows})		
 	</select>
 	<select id="getQueriedVehicles" resultType="detialVehicleInfo" parameterType="java.util.Map">
 		select 
@@ -50,6 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and vehicle_lock = (#{lock}-1)
 			</if>
 		</where>
+	</select>
+	<select id="getCounts" resultType="int">
+		select count(vehicle_id) from zh_vehicle
 	</select>
 	<insert id="createVehicle" parameterType="zh_vehicle">
 		insert into

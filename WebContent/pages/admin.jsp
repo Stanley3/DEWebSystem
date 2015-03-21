@@ -21,7 +21,7 @@
 	});
 	function searchAndReload(name, role) {
 		$('#dg').datagrid({
-			url : 'http://localhost:8080/ZHWS/rest/users',
+			url : '../rest/users',
 			method : 'get',
 			queryParams : {
 				name : name,
@@ -84,7 +84,7 @@
 				var i;
 				for (i in changes) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/users',
+						url : '../rest/users',
 						type : 'post',
 						dataType : 'text',
 						data : {
@@ -115,7 +115,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].user_id != undefined
 						&& changes[i].user_id != ""; ++i) {
-					url = "http://localhost:8080/ZHWS/rest/users/"
+					url = "../rest/users/"
 							+ changes[i].user_id;
 					$.ajax({
 						url : url,
@@ -147,7 +147,7 @@
 						&& changes[i].user_id != undefined
 						&& changes[i].user_id != ""; ++i) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/users/'
+						url : '../rest/users/'
 								+ changes[i].user_id,
 						type : 'delete',
 						dataType : 'text',
@@ -207,7 +207,7 @@
 	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
-			<a href="" class="logo"> <img
+			<a href="vehicle.jsp" class="logo"> <img
 				src="../resources/template/images/logo.gif" alt="Logo" />
 			</a>
 		</div>
@@ -241,7 +241,7 @@
 								rownumbers:true,
 								singleSelect:true,
 								pagination:true,
-								url:'http://localhost:8080/ZHWS/rest/users',
+								url:'../rest/users',
 								method:'get',
 								toolbar: '#tb',
 								onDblClickRow: onDblClickRow,

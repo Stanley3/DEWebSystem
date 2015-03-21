@@ -33,7 +33,7 @@ public class ResetPwd extends HttpServlet{
 		if(pwd.equals(oldPwd)){
 			String user_id = (String) session.getAttribute("user_id");
 			Client client = ClientBuilder.newClient();
-			WebTarget target = client.target("http://localhost:8080/ZHWS/rest")
+			WebTarget target = client.target("../rest")
 							.path("users").path(user_id);
 			System.out.println(target.getUri().toURL().toString());
 			Form form = new Form();
@@ -41,7 +41,7 @@ public class ResetPwd extends HttpServlet{
 			String result = target.request(MediaType.TEXT_PLAIN)
 					.post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE), String.class);
 			if(result.equals("true")){
-				response.sendRedirect("vehicle.html");
+				response.sendRedirect("resetSuccess.jsp");
 			}
 			
 		}else{

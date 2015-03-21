@@ -38,6 +38,7 @@ public class ZH_AreaService {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
+	@Transactional
 	public Response createArea(@FormParam("address") String address){
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replace("-", "");
@@ -59,15 +60,18 @@ public class ZH_AreaService {
 		map.put("pages", pages);
 		map.put("rows", rows);
 		int totals = areaDao.getCounts();
-		System.out.println(totals);
-		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("total", totals);
-		result.put("rows", areaDao.getArea(map));
-		System.out.println("pages=" + pages + ", rows=" + rows);
-		if(address.isEmpty())
-			return Response.status(200).entity(result).build();
+		if(address.isEmpty()){
+			if(rows != 0 && pages != 0){
+				//将返回结果组合成分页工具需要的json格式
+				Map<String, Object> result = new HashMap<String, Object>();
+				result.put("total", totals);
+				result.put("rows", areaDao.getArea(map));
+				return Response.status(200).entity(result).build();
+			}else
+				//返回combobox需要的数据格式
+				return Response.status(200).entity(areaDao.getArea(map)).build();
+		}
 		else{
-			System.out.println("地址为：" + address);
 			return Response.status(200).entity(areaDao.getQueriedArea(address)).build();
 		}
 	}
@@ -83,39 +87,6 @@ public class ZH_AreaService {
 			return Response.status(404).entity("请求的id" + id + "不存在！").build();
 		}
 	}
-	
-	/*@PUT 
-	@Path("{id}")
-	@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-	@Produces({MediaType.TEXT_HTML})	
-	@Transactional
-	public Response updateUserById(@PathParam("id") String id, ZH_Area area) {
-		if(area.getArea_id() == null) area.setArea_id(id);
-		System.out.println("更新操作得到执行");
-		String message; 
-		int status; 
-		if(areaWasUpdated(area)){
-			status = 200; //OK
-			message = "更新成功";
-		} else if(areaCanBeCreated(area)){
-			areaDao.createArea(area);
-			status = 201; //Created 
-			message = "新增成功";
-		} else {
-			status = 406; //Not acceptable
-			message = "提供的信息不正取";
-		}
-		
-		return Response.status(status).entity(message).build();		
-	}
-	
-	private boolean areaWasUpdated(ZH_Area Area){
-		return areaDao.updateArea(Area) == 1;
-	}
-	
-	private boolean areaCanBeCreated(ZH_Area area){
-		return area.getArea_id() != null && area.getArea_address() != null;
-	}*/
 	
 	@Path("{id}")
 	@POST

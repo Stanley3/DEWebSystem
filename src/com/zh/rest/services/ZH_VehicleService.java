@@ -56,9 +56,24 @@ public class ZH_VehicleService {
 			@DefaultValue("") @QueryParam("sn") String sn,
 			@DefaultValue("") @QueryParam("phone") String phone,
 			@DefaultValue("") @QueryParam("area") String area,
-			@DefaultValue("") @QueryParam("lock") String lock) {
-		if(vin.isEmpty() && sn.isEmpty() && phone.isEmpty() && area.isEmpty() && lock.isEmpty())
-			return Response.status(200).entity(vehicleDao.getVehicles()).build();
+			@DefaultValue("") @QueryParam("lock") String lock,
+			@DefaultValue("0") @QueryParam("rows") String row,
+			@DefaultValue("0") @QueryParam("page") String page) {
+		int rows = Integer.valueOf(row);
+		int pages = Integer.valueOf(page);
+		Map<String, Integer> param = new HashMap<String, Integer>();
+		param.put("rows", rows);
+		param.put("pages", pages);
+		if(vin.isEmpty() && sn.isEmpty() && phone.isEmpty() && area.isEmpty() && lock.isEmpty()){
+			if(rows != 0 && pages != 0){
+				int totals = vehicleDao.getCounts();
+				Map<String, Object>result = new HashMap<String, Object>();
+				result.put("total", totals);
+				result.put("rows", vehicleDao.getVehicles(param));
+				return Response.status(200).entity(result).build();
+			}else
+				return Response.status(200).entity(vehicleDao.getVehicles(param)).build();
+		}
 		else{
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("vin", vin);

@@ -16,8 +16,8 @@
 	display: none
 }
 </style>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	var editIndex = undefined;
 	$(function() {
@@ -25,7 +25,7 @@
 	});
 	function searchAndReload(v) {
 		$('#dg').datagrid({
-			url : 'http://localhost:8080/ZHWS/rest/areas',
+			url : '../rest/areas',
 			method : 'get',
 			queryParams : {
 				address : v
@@ -80,7 +80,7 @@
 				var completed; //确保上次的ajax成功后才进行下次的ajax操作
 				for (i in changes) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/areas',
+						url : '../rest/areas',
 						type : 'post',
 						dataType : 'text',
 						data : {
@@ -106,7 +106,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].area_id != undefined
 						&& changes[i].area_id != ""; ++i) {
-					url = "http://localhost:8080/ZHWS/rest/areas/"
+					url = "../rest/areas/"
 							+ changes[i].area_id;
 					$.ajax({
 						url : url,
@@ -133,7 +133,7 @@
 						&& changes[i].area_id != undefined
 						&& changes[i].area_id != ""; ++i) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/areas/'
+						url : '../rest/areas/'
 								+ changes[i].area_id,
 						type : 'delete',
 						dataType : 'text',
@@ -224,7 +224,7 @@
 								rownumbers:true,
 								singleSelect:true,
 								pagination:true,
-								url:'http://localhost:8080/ZHWS/rest/areas',
+								url:'../rest/areas',
 								method:'get',
 								toolbar: '#tb',
 								onDblClickRow: onDblClickRow,

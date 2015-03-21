@@ -36,7 +36,7 @@
 			alert("vin=" + vin + ", sn=" + ", " + phone + ", area=" + area
 					+ ", lock=" + lock);
 			$('#dg').datagrid({
-				url : 'http://localhost:8080/ZHWS/rest/vehicles',
+				url : '../rest/vehicles',
 				method : 'get',
 				queryParams : {
 					vin : vin,
@@ -105,7 +105,7 @@
 				var completed; //确保上次的ajax成功后才进行下次的ajax操作
 				for (i in changes) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/vehicles',
+						url : '../rest/vehicles',
 						type : 'post',
 						dataType : 'text',
 						data : {
@@ -137,7 +137,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].vehicle_id != undefined
 						&& changes[i].vehicle_id != ""; ++i) {
-					url = "http://localhost:8080/ZHWS/rest/vehicles/"
+					url = "../rest/vehicles/"
 							+ changes[i].vehicle_id;
 					$.ajax({
 						url : url,
@@ -170,7 +170,7 @@
 						&& changes[i].vehicle_id != undefined
 						&& changes[i].vehicle_id != ""; ++i) {
 					$.ajax({
-						url : 'http://localhost:8080/ZHWS/rest/vehicles/'
+						url : '../rest/vehicles/'
 								+ changes[i].vehicle_id,
 						type : 'delete',
 						dataType : 'text',
@@ -293,7 +293,7 @@
 						rownumbers:true,
 						singleSelect:true,
 						pagination:true,
-						url:'http://localhost:8080/ZHWS/rest/vehicles',
+						url:'../rest/vehicles',
 						method:'get',
 						toolbar: '#tb',
 						onDblClickRow : onDblClickRow,
@@ -338,7 +338,7 @@
 											missingMessage : '请选择客户',
 											valueField: 'guest_id',
 											textField: 'guest_name',
-											url : 'http://localhost:8080/ZHWS/rest/guests',
+											url : '../rest/guests',
 											method : 'get' ,
 											onSelect : onSelect
 										}
@@ -402,7 +402,7 @@
 									data-options="
 												valueField: 'area_id',
 												textField: 'area_address',
-												url : 'http://localhost:8080/ZHWS/rest/areas',
+												url : '../rest/areas',
 												method: 'get'" />
 								</td>
 								<td><label for="slock">请选择锁定状态：</label> <input id="sLock"

@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet{
 		
 		ZH_User user = null;
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080/ZHWS/rest").path("users").path("validate");
+		WebTarget target = client.target("../rest").path("users").path("validate");
 		Form form = new Form();
 		form.param("name", name);
 		form.param("password", password);

@@ -2,9 +2,11 @@ package com.zh.rest.entities;
 
 import java.io.Serializable;
 
+import javax.annotation.Resource;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Resource
 public class ZH_Area  implements Serializable {
 	public static final long serialVersionUID = -6076337053803968669L;
 	

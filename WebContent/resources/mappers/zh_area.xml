@@ -11,20 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where area_id = #{id}
 	</select>
 	<select id="getArea" resultType="zh_area" parameterType="java.util.Map">
-		<!-- declare rows int
-		set @rows = (#{pages}-1)*#{rows}
-		select 
-		<include refid="areaColumns" />
-		<choose>
-			<when test="rows == 0">
-				from zh_area
-			</when>
-			<otherwise>
-				from zh_area 
-				limit @rows, #{rows}
-			</otherwise>
-		</choose> -->
-		call area_pagination(#{rows}, (#{pages}-1)*#{rows})
+		<!-- 使用存储过程，用于分页 -->
+		call area_pagination((#{pages}-1)*#{rows}, #{rows})
 	</select>
 	<select id="getQueriedArea" resultType="zh_area">
 		select

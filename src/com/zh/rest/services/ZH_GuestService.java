@@ -1,6 +1,8 @@
 package com.zh.rest.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -47,13 +49,23 @@ public class ZH_GuestService {
 	public Response getAllGuests(
 			@DefaultValue("") @QueryParam("name") String name,
 			@DefaultValue("") @QueryParam("cellphone") String cellphone,
-			@DefaultValue("") @QueryParam("address") String address) {
+			@DefaultValue("") @QueryParam("address") String address,
+			@DefaultValue("0") @QueryParam("rows") String row,
+			@DefaultValue("0") @QueryParam("page") String page) {
 		ArrayList<DetialGuestInfo> guestList;
-		System.out
-				.println("输入的客户名为: " + name + ", 手机号为：" + ", 地址为: " + address);
+		int rows = Integer.valueOf(row);
+		int pages = Integer.valueOf(page);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("rows", rows);
+		map.put("pages", pages);
 		if (name.isEmpty() && cellphone.isEmpty() && address.isEmpty()) {
-			guestList = (ArrayList<DetialGuestInfo>) guestDao.getGuests();
-			return Response.status(200).entity(guestList).build();
+			if(pages != 0 && rows != 0){
+				Map<String, Object> result = new HashMap<String, Object>();
+				result.put("total", guestDao.getCounts());
+				result.put("rows", guestDao.getGuests(map));
+				return Response.status(200).entity(result).build();
+			}else
+				return Response.status(200).entity(guestDao.getGuests(map)).build();
 		} else {
 			guestList = (ArrayList<DetialGuestInfo>) guestDao.getQueriedGuests(
 					name, cellphone, address);
