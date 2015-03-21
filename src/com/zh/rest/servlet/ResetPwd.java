@@ -15,6 +15,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 
+import com.zh.rest.entities.Util;
+
 public class ResetPwd extends HttpServlet{
 
 	/**
@@ -33,7 +35,7 @@ public class ResetPwd extends HttpServlet{
 		if(pwd.equals(oldPwd)){
 			String user_id = (String) session.getAttribute("user_id");
 			Client client = ClientBuilder.newClient();
-			WebTarget target = client.target("../rest")
+			WebTarget target = client.target(Util.BASEURL + "rest")
 							.path("users").path(user_id);
 			System.out.println(target.getUri().toURL().toString());
 			Form form = new Form();

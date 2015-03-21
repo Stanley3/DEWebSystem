@@ -115,8 +115,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].user_id != undefined
 						&& changes[i].user_id != ""; ++i) {
-					url = "../rest/users/"
-							+ changes[i].user_id;
+					url = "../rest/users/" + changes[i].user_id;
 					$.ajax({
 						url : url,
 						type : 'post',
@@ -147,8 +146,7 @@
 						&& changes[i].user_id != undefined
 						&& changes[i].user_id != ""; ++i) {
 					$.ajax({
-						url : '../rest/users/'
-								+ changes[i].user_id,
+						url : '../rest/users/' + changes[i].user_id,
 						type : 'delete',
 						dataType : 'text',
 						beforeSend : function(request) {
@@ -192,11 +190,12 @@
 		else
 			return;
 	}
-	
-	function onClickCell(index){
-		onDblClickRow(index);
+
+	function onClickCell(index) {
+		if (field == 'edit')
+			onDblClickRow(index);
 	}
-	function editStyler(value, row, index){
+	function editStyler(value, row, index) {
 		return 'background: url(../resources/images/edit.png) no-repeat center';
 	}
 </script>

@@ -17,7 +17,8 @@
 }
 </style>
 <script type="text/javascript" src="../resources/js/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="../resources/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
 	var editIndex = undefined;
 	$(function() {
@@ -106,8 +107,7 @@
 				for (i = 0; i < changes.length
 						&& changes[i].area_id != undefined
 						&& changes[i].area_id != ""; ++i) {
-					url = "../rest/areas/"
-							+ changes[i].area_id;
+					url = "../rest/areas/" + changes[i].area_id;
 					$.ajax({
 						url : url,
 						type : 'post',
@@ -133,8 +133,7 @@
 						&& changes[i].area_id != undefined
 						&& changes[i].area_id != ""; ++i) {
 					$.ajax({
-						url : '../rest/areas/'
-								+ changes[i].area_id,
+						url : '../rest/areas/' + changes[i].area_id,
 						type : 'delete',
 						dataType : 'text',
 						success : function(data) {
@@ -175,11 +174,12 @@
 		else
 			return;
 	}
-	
-	function onClickCell(index){
-		onDblClickRow(index);
+
+	function onClickCell(index) {
+		if (field == 'edit')
+			onDblClickRow(index);
 	}
-	function editStyler(value, row, index){
+	function editStyler(value, row, index) {
 		return 'background: url(../resources/images/edit.png) no-repeat center';
 	}
 </script>

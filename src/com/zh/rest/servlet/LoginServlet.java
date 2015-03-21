@@ -14,6 +14,8 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 
 
+
+import com.zh.rest.entities.Util;
 import com.zh.rest.entities.ZH_User;
 
 public class LoginServlet extends HttpServlet{
@@ -31,7 +33,7 @@ public class LoginServlet extends HttpServlet{
 		
 		ZH_User user = null;
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("../rest").path("users").path("validate");
+		WebTarget target = client.target(Util.BASEURL + "rest").path("users").path("validate");
 		Form form = new Form();
 		form.param("name", name);
 		form.param("password", password);
