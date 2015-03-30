@@ -301,7 +301,6 @@
 						">
 						<thead height="100px">
 							<tr>
-								<th data-options="field:'vehicle_id',width:100,hidden:true">客户电话</th>
 								<th
 									data-options="field:'vehicle_sn',width:80, 
 									editor:{
@@ -344,9 +343,9 @@
 										}
 									}">客户名称</th>
 								<th data-options="field:'guest_cellphone',width:100">客户电话</th>
-								<th data-options="field:'vehicle_status',width:100, styler: statusStyler">运行</th>
+								<th data-options="field:'vehicle_status',width:50, styler: statusStyler">运行</th>
 								<th
-									data-options="field:'vehicle_lock',width:100, styler: lockStyler,
+									data-options="field:'vehicle_lock',width:50, styler: lockStyler,
 									editor:{
 										type: 'combobox',
 										options : {
@@ -361,7 +360,7 @@
 										}
 									}">锁定</th>
 								<th data-options="field:'area_address',width:100">所在地区</th>
-								<th data-options="field:'vehicle_version',width:100">当前版本</th>
+								<th data-options="field:'vehicle_version',width:50">当前版本</th>
 								<th
 									data-options="field:'vehicle_arrearage',width:100, 
 									editor:{
