@@ -24,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <% response.sendRedirect(response.encodeRedirectURL(request.getContextPath() +
-        "/index.jsp")); %>
+        "/index.html")); %>
   </body>
 </html>

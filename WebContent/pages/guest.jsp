@@ -210,7 +210,7 @@
 	%>
 	<div id="header">
 		<div class="col w5 bottomlast">
-			<a href="" class="logo"> <img
+			<a href="vehicle.jsp" class="logo"> <img
 				src="../resources/template/images/logo.gif" alt="Logo" />
 			</a>
 		</div>
@@ -230,7 +230,7 @@
 					<div id="right"></div>
 					<ul>
 						<li><a href="vehicle.jsp"><span>车辆管理</span></a></li>
-						<li><a href="arrearage.jsp"><span>欠费管理</span></a></li>
+						<!-- <li><a href="arrearage.jsp"><span>欠费管理</span></a></li> -->
 						<li><a href="admin.jsp"><span>超管管理</span></a></li>
 						<li><a href="area.jsp"><span>地区管理</span></a></li>
 						<li><a href="guest.jsp" class="selected"><span>客户管理</span></a></li>

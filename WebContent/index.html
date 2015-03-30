@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>管理员登录-驾驶员培训科目三模拟考试系统管理后台</title>
+<link rel="stylesheet" href="resources/css/styles.css">
+<link href="resources/easyui/themes/default/easyui.css" type="text/css"
+	rel="stylesheet" />
+<link href="resources/easyui/themes/icon.css" type="text/css"
+	rel="stylesheet" />
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.easyui.min.js"></script>
+<script type="text/javascript">
+	function login() {
+		return $('#login').form('validate');
+	}
+</script>
+</head>
+<body>
+	<div class="page clearfix">
+		<header>
+			<img alt="中和科技科目三模拟考试系统远程管理平台" src="resources/images/topbg.png">
+		</header>
+		<main role="main">
+			<div class="panel">
+				<div class="easyui-panel" title="管理员登录"
+					style="width:400px;padding:1.875em 3.75em; font-size:1.125em">
+					<form id="login" method="post" action="LoginServlet">
+						<div class="input">
+							<input class="easyui-textbox" style="width:100%;height:32px"
+								name="name" id="name"
+								data-options="required:true, missingMessage:'请输入用户名', iconCls:'icon-man', iconAlign:'right'"
+								type="text" />
+						</div>
+						<div class="input">
+							<input class="easyui-textbox" style="width:100%;height:32px"
+								name="password" id="password" type="password"
+								data-options="required:true, missingMessage:'请输入密码', iconCls:'icon-lock', iconAlign:'right'" />
+						</div>
+						<div>
+							<input type="submit" class="easyui-linkbutton" id="submit"
+								onclick="return login();" style="width:100%;height:32px"
+								value="登录" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</main>
+		<footer role="contentinfo" class="footer">
+			<p class="legal">
+				<small>&copy: 2015 中和科技 All Rights Reserved.</small>
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

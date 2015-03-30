@@ -44,7 +44,7 @@
 					<div class="clear"></div>
 				</div>
 				<div class="content">
-					<a href="../index.jsp" class="easyui-linkbutton"
+					<a href="../index.html" class="easyui-linkbutton"
 						style="margin:5px;padding:5px;">密码修改成功请点击重新登录</a>
 					<div id="body_footer">
 						<div id="bottom_left">

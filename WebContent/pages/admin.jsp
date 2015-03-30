@@ -226,7 +226,7 @@
 					<div id="right"></div>
 					<ul>
 						<li><a href="vehicle.jsp"><span>车辆管理</span></a></li>
-						<li><a href="arrearage.jsp"><span>欠费管理</span></a></li>
+						<!-- <li><a href="arrearage.jsp"><span>欠费管理</span></a></li> -->
 						<li><a href="admin.jsp" class="selected"><span>超管管理</span></a></li>
 						<li><a href="area.jsp"><span>地区管理</span></a></li>
 						<li><a href="guest.jsp"><span>客户管理</span></a></li>

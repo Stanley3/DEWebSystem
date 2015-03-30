@@ -42,7 +42,8 @@ public class LoginServlet extends HttpServlet{
 			session.setAttribute("user_id", user.getUser_id());
 			session.setAttribute("pwd", user.getUser_password());
 			session.setAttribute("name", user.getUser_name());
-			resp.setHeader("refresh", "0;URL=pages/admin.jsp");
+			session.setAttribute("role", user.getUser_role());
+			resp.setHeader("refresh", "0;URL=pages/vehicle.jsp");
 		}
 	}
 }

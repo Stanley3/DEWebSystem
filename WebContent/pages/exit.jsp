@@ -8,10 +8,10 @@
   </head>
   <body>
     <%
-    	response.setHeader("refresh", "3;URL=ZHWS/index.jsp");
+    	response.setHeader("refresh", "3;URL=ZHWS/index.html");
     	session.invalidate();
      %>
      <h3>您已成功退出本系统，3秒后跳转回登录页面；</h3>
-     <h3>如果没有跳转，请点击<a href="ZHWS/index.jsp">这里</a>。</h3>
+     <h3>如果没有跳转，请点击<a href="ZHWS/index.html">这里</a>。</h3>
   </body>
 </html>
